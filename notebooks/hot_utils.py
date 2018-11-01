@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 import glob
 from oxksc.cbvc import cbv
 import fitsio 
+from astropy.stats import LombScargle
+import astropy.units as u                          # We'll need this later.
+import copy
 
 def find_cbv(quarter):
     fname = glob.glob('../data/kplr_cbv/*q%02d*-d25_lcbv.fits' % quarter)[0]
@@ -74,3 +77,58 @@ def correct_quarter(lc,quarter):
     corrected_flux, weights = cbv.fixed_nb(lc[m].flux, basis,doPlot = False)
 
     return corrected_flux
+
+def sine_renormalize(lc,min_period=4./24.,max_period=30.):
+    powers = []
+
+    # get an overall mean model
+    bestfreq, power = get_best_freq(lc,min_period=0.5,max_period=10)
+    ytest_mean = LombScargle(lc.time, lc.flux-1, lc.flux_err).model(lc.time, bestfreq)
+    current = (np.max(ytest_mean)-np.min(ytest_mean))/2.
+
+    dummy = copy.copy(lc)
+
+    for j, q in enumerate(np.unique(lc.quarter)):
+        m = (lc.quarter == q)
+
+        ytest = LombScargle(lc.time[m], lc.flux[m]-1., lc.flux_err[m]).model(lc.time[m], bestfreq)
+        power = (np.max(ytest)-np.min(ytest))/2.#/np.median(dummy.flux[m])
+        dummy.flux[m] = 1.+(dummy.flux[m]-1.)/(power/current)
+
+        powers.append(power)
+    
+    return dummy, powers
+
+def get_best_freq(lc,min_period=4./24., max_period=30.):
+    lc2 = copy.copy(lc)
+
+    frequency, power = LombScargle(lc2.time, lc2.flux, lc2.flux_err).autopower(minimum_frequency=1./max_period,
+                                                                                         maximum_frequency=1./min_period, 
+                                                                                         samples_per_peak=3)
+    best_freq = frequency[np.argmax(power)]
+
+    # refine
+    for j in range(3):
+        frequency, power = LombScargle(lc2.time, lc2.flux, lc2.flux_err).autopower(minimum_frequency=best_freq*(1-1e-3*(3-j)),
+                                                                                         maximum_frequency=best_freq*(1+1e-3*(3-j)), 
+                                                                                         samples_per_peak=1000)
+        best_freq = frequency[np.argmax(power)]
+
+    return best_freq, np.max(power)
+
+
+def iterative_sine_fit(lc,nmax,min_period=4./24.*u.day, max_period=30.*u.day):
+    ff, pp, noise = [], [], []
+    y_fit = 0
+    lc2 = copy.copy(lc)
+
+    for j in range(nmax):
+        best_freq, maxpower = get_best_freq(lc,min_period=min_period,max_period=max_period)
+        
+        ff.append(best_freq)
+        pp.append(maxpower)
+        y_fit += LombScargle(lc2.time, lc2.flux-1, lc2.flux_err).model(lc2.time, best_freq)
+        lc2.flux = lc.flux - y_fit 
+        noise.append(lc2.estimate_cdpp())
+        
+    return lc2, ff, pp, noise 
