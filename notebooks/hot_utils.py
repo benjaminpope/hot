@@ -6,6 +6,7 @@ import fitsio
 from astropy.stats import LombScargle
 import astropy.units as u                          # We'll need this later.
 import copy
+from scipy.ndimage import gaussian_filter1d as gaussfilt
 
 def find_cbv(quarter):
     fname = glob.glob('../data/kplr_cbv/*q%02d*-d25_lcbv.fits' % quarter)[0]
@@ -58,6 +59,24 @@ def get_mod_out(channel):
     mod, out = tab['Mod'][index], tab['Out'][index]
     return int(mod), int(out)
 
+def stitch_lc_list(lcs,flux_type='PDCSAP_FLUX'):
+    quarters = np.array([])
+    channels = np.array([])
+    for j, lci in enumerate(lcs):
+        lci = lci.get_lightcurve(flux_type).remove_nans()
+        lci = lci[lci.quality==0]
+        lcs[j] = lci.normalize()
+        quarters = np.append(quarters,lci.quarter*np.ones_like(lci.flux))
+        channels = np.append(channels,lci.channel*np.ones_like(lci.flux))
+
+    lc = lcs[0]
+    for lci in lcs[1:]:
+        lc = lc.append(lci)
+        
+    lc.quarter = quarters.astype('int')
+    lc.channel = channels.astype('int')
+
+    return lc
 
 def match_cadences(cbvcads,lccads):
     indices =np.array([1 if j in lccads else 0 for j in cbvcads])
@@ -67,14 +86,15 @@ def correct_quarter(lc,quarter):
     fname = find_cbv(quarter)
     cbvfile = fitsio.FITS(fname)
     m = (lc.quarter== quarter)
+    channel = lc.channel[0]
 
-    cads = match_cadences(cbvfile[lc.channel]['CADENCENO'][:],lc[m].cadenceno)
+    cads = match_cadences(cbvfile[channel]['CADENCENO'][:],lc[m].cadenceno)
     basis = np.zeros((lc[m].flux.shape[0],16))
 
     for j in range(16):
-        basis[:,j] = cbvfile[lc.channel]['VECTOR_%d'% (j+1)][cads]
+        basis[:,j] = cbvfile[channel]['VECTOR_%d'% (j+1)][cads]
         
-    corrected_flux, weights = cbv.fixed_nb(lc[m].flux, basis,doPlot = False)
+    corrected_flux, weights = cbv.fixed_nb(lc[m].flux, basis, doPlot = False)
 
     return corrected_flux
 
@@ -104,26 +124,26 @@ def get_best_freq(lc,min_period=4./24., max_period=30.):
 
     frequency, power = LombScargle(lc2.time, lc2.flux, lc2.flux_err).autopower(minimum_frequency=1./max_period,
                                                                                          maximum_frequency=1./min_period, 
-                                                                                         samples_per_peak=3)
+                                                                                         samples_per_peak=3,normalization='psd')
     best_freq = frequency[np.argmax(power)]
 
     # refine
     for j in range(3):
         frequency, power = LombScargle(lc2.time, lc2.flux, lc2.flux_err).autopower(minimum_frequency=best_freq*(1-1e-3*(3-j)),
                                                                                          maximum_frequency=best_freq*(1+1e-3*(3-j)), 
-                                                                                         samples_per_peak=1000)
+                                                                                         samples_per_peak=1000,normalization='psd')
         best_freq = frequency[np.argmax(power)]
 
     return best_freq, np.max(power)
 
 
-def iterative_sine_fit(lc,nmax,min_period=4./24.*u.day, max_period=30.*u.day):
+def iterative_sine_fit(lc,nmax,min_period=4./24., max_period=30.):
     ff, pp, noise = [], [], []
     y_fit = 0
     lc2 = copy.copy(lc)
 
     for j in range(nmax):
-        best_freq, maxpower = get_best_freq(lc,min_period=min_period,max_period=max_period)
+        best_freq, maxpower = get_best_freq(lc2,min_period=min_period,max_period=max_period)
         
         ff.append(best_freq)
         pp.append(maxpower)
@@ -131,4 +151,21 @@ def iterative_sine_fit(lc,nmax,min_period=4./24.*u.day, max_period=30.*u.day):
         lc2.flux = lc.flux - y_fit 
         noise.append(lc2.estimate_cdpp())
         
-    return lc2, ff, pp, noise 
+    return lc2, np.array(ff), np.array(pp), np.array(noise) 
+
+def renorm_sde(bls,niter=3,order=2,nsig=2.5):
+    '''
+    In Pope et al 2016 we noted that the BLS has a slope towards longer periods. 
+    To fix this we used the full ensemble of stars to build a binne median SDE as a function of period.
+    With our smaller numbers here we just aggressively sigma-clip and fit a quadratic, and it seems to do basically ok. 
+    '''
+    trend = gaussfilt(bls.sde,20)
+    sde = copy.copy(bls.sde)
+    outliers = np.zeros(len(sde))
+
+    for j in range(niter):
+        outliers = np.abs(sde-trend)>(nsig*np.std(sde-trend))
+        sde[outliers] += trend[outliers]
+        trend = np.poly1d(np.polyfit(bls.period,sde,order))(bls.period)
+
+    return trend 
