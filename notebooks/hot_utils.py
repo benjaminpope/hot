@@ -1,28 +1,40 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import glob
-from oxksc.cbvc import cbv
 import fitsio 
+
 from astropy.stats import LombScargle
-import astropy.units as u                          # We'll need this later.
+import astropy.units as u               
+
+# general           
 import copy
 from scipy.ndimage import gaussian_filter1d as gaussfilt
-from pybls import BLS
 from matplotlib import rc
+from time import time as clock
 
+from lightkurve import KeplerLightCurveFile, KeplerLightCurve
+from numpy.core.records import array as rarr
 
 # planet search stuff
-
+from pybls import BLS
 from k2ps.psearch import TransitSearch
 from scipy.ndimage import binary_dilation
 from pytransit import MandelAgol as MA
 from pytransit import Gimenez as GM
 from acor import acor
 
+from exotk.utils.misc import fold
 from exotk.utils.orbits import as_from_rhop, i_from_baew
 from exotk.utils.likelihood import ll_normal_es
+from exotk.utils.misc_f import utilities as uf
+
+from oxksc.cbvc import cbv
+
+#plotting
+import matplotlib
 from matplotlib.gridspec import GridSpec
 from matplotlib.pyplot import figure, subplots, subplot
+colours = matplotlib.rcParams['axes.prop_cycle'].by_key()['color']
 
 
 def find_cbv(quarter):
@@ -76,6 +88,8 @@ def get_mod_out(channel):
     mod, out = tab['Mod'][index], tab['Out'][index]
     return int(mod), int(out)
 
+
+
 def stitch_lc_list(lcs,flux_type='PDCSAP_FLUX'):
     quarters = np.array([])
     channels = np.array([])
@@ -94,6 +108,15 @@ def stitch_lc_list(lcs,flux_type='PDCSAP_FLUX'):
     lc.channel = channels.astype('int')
 
     return lc
+
+def censor_quarters(lc):
+    noisy = np.ones_like(lci.flux)
+    for quarter in np.unique(lc.quarter):
+        m = lc.quarter==quarter
+        noisy[m] = np.nanstd(lc.flux[m])
+
+    bad = noisy>(5*np.nanmin(noisy))
+    return lc[~bad]
 
 def match_cadences(cbvcads,lccads):
     indices =np.array([1 if j in lccads else 0 for j in cbvcads])
@@ -130,7 +153,7 @@ def sine_renormalize(lc,min_period=4./24.,max_period=30.):
     powers = []
 
     # get an overall mean model
-    bestfreq, power = get_best_freq(lc,min_period=0.5,max_period=10)
+    bestfreq, power, falarm = get_best_freq(lc,min_period=0.5,max_period=10)
     ytest_mean = LombScargle(lc.time, lc.flux-1, lc.flux_err).model(lc.time, bestfreq)
     current = (np.max(ytest_mean)-np.min(ytest_mean))/2.
 
@@ -152,17 +175,19 @@ def get_best_freq(lc,min_period=4./24., max_period=30.):
 
     frequency, power = LombScargle(lc2.time, lc2.flux, lc2.flux_err).autopower(minimum_frequency=1./max_period,
                                                                                          maximum_frequency=1./min_period, 
-                                                                                         samples_per_peak=3,normalization='psd')
+                                                                                         samples_per_peak=3)
     best_freq = frequency[np.argmax(power)]
 
     # refine
     for j in range(3):
-        frequency, power = LombScargle(lc2.time, lc2.flux, lc2.flux_err).autopower(minimum_frequency=best_freq*(1-1e-3*(3-j)),
-                                                                                         maximum_frequency=best_freq*(1+1e-3*(3-j)), 
-                                                                                         samples_per_peak=1000,normalization='psd')
+        ls = LombScargle(lc2.time, lc2.flux, lc2.flux_err)
+        frequency, power = ls.autopower(minimum_frequency=best_freq*(1-1e-3*(3-j)),maximum_frequency=best_freq*(1+1e-3*(3-j)), 
+                                                                                         samples_per_peak=500)
         best_freq = frequency[np.argmax(power)]
 
-    return best_freq, np.max(power)
+    falarm = ls.false_alarm_probability(np.max(power))
+
+    return best_freq, ls.power(best_freq,normalization='psd'), falarm
 
 
 def iterative_sine_fit(lc,nmax,min_period=4./24., max_period=30.):
@@ -171,7 +196,7 @@ def iterative_sine_fit(lc,nmax,min_period=4./24., max_period=30.):
     lc2 = copy.copy(lc)
 
     for j in range(nmax):
-        best_freq, maxpower = get_best_freq(lc2,min_period=min_period,max_period=max_period)
+        best_freq, maxpower, falarm = get_best_freq(lc2,min_period=min_period,max_period=max_period)
         
         ff.append(best_freq)
         pp.append(maxpower)
@@ -187,6 +212,36 @@ def iterative_sine_fit(lc,nmax,min_period=4./24., max_period=30.):
         lc2.corr_flux = lc2.flux - lc2.trtime + np.nanmedian(lc2.trtime)
         
     return lc2, np.array(ff), np.array(pp), np.array(noise) 
+
+
+def auto_sine_fit(lc,prob_max=1e-10, maxiter=60,min_period=4./24., max_period=30.):
+    ff, pp, snr, noise = [], [], [], []
+    y_fit = 0
+    lc2 = copy.copy(lc)
+    
+    i = 0
+    falarm = 0.0
+    while falarm <= prob_max:
+        best_freq, maxpower, falarm = get_best_freq(lc2,min_period=min_period,max_period=max_period)
+        ff.append(best_freq)
+        pp.append(maxpower)
+        snr.append(falarm)
+        y_fit += LombScargle(lc2.time, lc2.flux-1, lc2.flux_err).model(lc2.time, best_freq)
+        lc2.flux = lc.flux - y_fit 
+        noise.append(lc2.estimate_cdpp())
+        
+        i += 1 
+        if i > maxiter:
+            break
+
+    lc2.trtime = y_fit + np.nanmedian(lc.flux)
+    lc2.flux = lc.flux
+    try:
+        lc2.corr_flux = lc2.corr_flux - lc2.trtime + np.nanmedian(lc2.trtime)
+    except:
+        lc2.corr_flux = lc2.flux - lc2.trtime + np.nanmedian(lc2.trtime)
+        
+    return lc2, np.array(ff), np.array(pp), np.array(noise), np.array(snr), i
 
 def renorm_sde(bls,niter=3,order=2,nsig=2.5):
     '''
@@ -260,12 +315,22 @@ def estimate_cdpp(lc, flux, transit_duration=13, savgol_window=101,
     lc2.flux = flux
     return lc2.estimate_cdpp()
 
+### this stuff is all cribbed from k2ps
 
 str_to_dt = lambda s: [tuple(t.strip().split()) for t in s.split(',')]
 dt_lcinfo    = str_to_dt('epic u8, flux_median f8, Kp f8, flux_std f8, lnlike_constant f8, type a8,'
                          'acor_raw f8, acor_corr f8, acor_trp f8, acor_trt f8')
 dt_blsresult = str_to_dt('sde f8, bls_zero_epoch f8, bls_period f8, bls_duration f8, bls_depth f8,'
                          'bls_radius_ratio f8, ntr u4')
+
+from scipy.constants import G
+from exotk.utils.orbits import d_s
+from seaborn import despine
+from matplotlib.pyplot import setp, subplots
+
+
+def rho_from_pas(period,a):
+    return 1e-3*(3*np.pi)/G * a**3 * (period*d_s)**-2
 
 class BasicSearch(TransitSearch):
     
@@ -274,9 +339,17 @@ class BasicSearch(TransitSearch):
         ## -----------------
         self.nbin = kwargs.get('nbin', 2000)
         self.qmin = kwargs.get('qmin', 0.001)
-        self.qmax = kwargs.get('qmax', 0.115)
-        self.nf   = kwargs.get('nfreq', 10000)
+        self.qmax = kwargs.get('qmax', 0.01)
+        self.nf   = kwargs.get('nfreq', 45000)
         self.exclude_regions = kwargs.get('exclude_regions', [])
+        try:
+            self.pp = d.pp
+            self.ff = d.ff
+            self.niter = d.niter
+        except:
+            self.pp = []
+            self.ff = []
+            self.niter = np.nan
 
         ## Read in the data
         ## ----------------
@@ -371,7 +444,118 @@ class BasicSearch(TransitSearch):
         self.zero_epoch = b.tc
         self.duration = b.t2-b.t1
 
-def plot_all(ts):
+    def plot_info(self, ax):
+        res  = rarr(self.result)
+        t0,p,tdur,tdep,rrat = res.trf_zero_epoch[0], res.trf_period[0], res.trf_duration[0], res.trf_depth[0], 0
+        a = res.trf_semi_major_axis[0]
+        ax.text(0.0,1.0, 'KIC {:d}'.format(self.epic), size=12, weight='bold', va='top', transform=ax.transAxes)
+        ax.text(0.0,0.83, ('SDE\n'
+                          'Sines\n'
+                          'Zero epoch\n'
+                          'Period [d]\n'
+                          'Transit depth\n'
+                          'Radius ratio\n'
+                          'Transit duration [h]\n'
+                          'Impact parameter\n'
+                          'Stellar density'), size=9, va='top')
+        ax.text(0.97,0.83, ('{:9.3f}\n{:d}\n{:9.3f}\n{:9.3f}\n{:9.5f}\n'
+                           '{:9.4f}\n{:9.3f}\n{:9.3f}\n{:0.3f}').format(res.sde[0],self.niter,t0,p,tdep,np.sqrt(tdep),24*tdur,
+                                                                        res.trf_impact_parameter[0], rho_from_pas(p,a)),
+                size=9, va='top', ha='right')
+        despine(ax=ax, left=True, bottom=True)
+        setp(ax, xticks=[], yticks=[])
+
+    def plot_pgram(self,ax):
+        min_period=4./24.
+        max_period=30.
+
+        frequency, power = LombScargle(self.time, self.flux_r, self.flux_e).autopower(minimum_frequency=1./max_period,maximum_frequency=1./min_period,
+                                                                                   samples_per_peak=10,normalization='psd')
+        ax.plot(frequency,power**0.5,color=colours[0])
+        ax.set_yscale('log')
+        ax.set_xlim(1./max_period,1/min_period)
+        try:
+            ax.scatter(self.ff,self.pp**0.5,c=colours[1])
+        except:
+            pass
+        frequency2, power2 = LombScargle(self.time, self.flux, self.flux_e).autopower(minimum_frequency=1./max_period,maximum_frequency=1./min_period,
+                                                                                     samples_per_peak=10,normalization='psd')
+        ax.plot(frequency2,power2**0.5,color=colours[2])
+
+    def plot_sde(self, ax=None):
+        r = rarr(self.result)
+        ax.plot(self.bls.period, self.bls.sde, drawstyle='steps-mid')
+        ax.axvline(r.bls_period, alpha=0.25, ls='--', lw=1)
+        setp(ax,xlim=self.bls.period[[-1,0]], xlabel='Period [d]', ylabel='SDE', ylim=(self.bls.sde.min()-1.5,self.bls.sde.max()+1.5))
+        [ax.axhline(i, c='k', ls='--', alpha=0.5) for i in [0,5,10]]
+        [ax.text(self.bls.period.max()-1,i-0.5,i, va='top', ha='right', size=7) for i in [5,10]]
+        ax.text(0.5, 0.88, 'BLS search', va='top', ha='center', size=8, transform=ax.transAxes)
+        setp(ax.get_yticklabels(), visible=False)
+
+    def plot_transit_fit(self, ax=None, nbin=None):
+        nbin = nbin or self.nbin
+        res  = rarr(self.result)
+        period, zero_epoch, duration = res.trf_period, res.trf_zero_epoch, res.trf_duration
+        if duration >= (0.25/24.):
+            hdur = 24*duration*np.array([-0.5,0.5])
+        else:
+            hdur = 24*np.array([-0.25,0.25])
+            duration = 0.5
+
+        flux_m = self.transit_model(self._pv_trf)
+        phase = 24*(fold(self.time, period, zero_epoch, 0.5, normalize=False) - 0.5*period)
+        sids = np.argsort(phase)
+        phase = phase[sids]
+        pmask = np.isfinite(flux_m)
+        flux_m = flux_m[sids]
+        flux_o = self.flux[sids]
+
+        bpd,bfd,bed = uf.bin(phase, flux_o, nbin)
+        ax.plot(phase[pmask], flux_o[pmask], '.',alpha=0.05,color=colours[0])
+        ax.plot(bpd, bfd, marker='o', ms=2,color=colours[1])
+        ax.plot(phase[pmask], flux_m[pmask], 'k')
+
+        ax.text(9*hdur[0], flux_m.min(), '{:6.4f}'.format(flux_m.min()), size=7, va='center', bbox=dict(color='white'))
+        ax.axhline(flux_m.min(), alpha=0.25, ls='--')
+
+        ax.get_yaxis().get_major_formatter().set_useOffset(False)
+        ax.axvline(0, alpha=0.25, ls='--', lw=1)
+        [ax.axvline(hd, alpha=0.25, ls='-', lw=1) for hd in hdur]
+        fluxrange =flux_o.max()-flux_o.min()
+        setp(ax, xlim=12*hdur, ylim=[flux_o.min()-0.05*fluxrange,flux_o.max()+0.05*fluxrange],
+         xlabel='Phase [h]', ylabel='Normalised flux')
+        setp(ax.get_yticklabels(), visible=False)
+
+    def plot_fit_and_eo(self, ax=None, nbin=None):
+        nbin = nbin or self.nbin
+        res  = rarr(self.result)
+        period, zero_epoch, duration = res.trf_period, res.trf_zero_epoch, res.trf_duration
+        if duration >= (0.25/24.):
+            hdur = 24*duration*np.array([-0.5,0.5])
+        else:
+            hdur = 24*np.array([-0.25,0.25])
+            duration = 0.5
+
+        self.plot_transit_fit(ax[0])
+
+        for time,flux_o in ((self.time_even,self.flux_even),
+                            (self.time_odd,self.flux_odd)):
+
+            phase = 24*(fold(time, period, zero_epoch, shift=0.5, normalize=False) - 0.5*period)
+            bpd,bfd,bed = uf.bin(phase, flux_o, nbin)
+            pmask = np.abs(bpd) < 2*24*duration
+            # omask = pmask & np.isfinite(bfd)
+            omask = np.isfinite(bfd)
+            ax[1].plot(bpd[omask], bfd[omask], marker='o', ms=2)
+
+        [a.axvline(0, alpha=0.25, ls='--', lw=1) for a in ax]
+        [[a.axvline(24*hd, alpha=0.25, ls='-', lw=1) for hd in hdur] for a in ax]
+        setp(ax[1],xlim=12*hdur, xlabel='Phase [h]')
+        setp(ax[1].get_yticklabels(), visible=False)
+        ax[1].get_yaxis().get_major_formatter().set_useOffset(False)
+
+
+def plot_all(ts,save_file=None):
     PW,PH = 8.27, 11.69
     rc('axes', labelsize=7, titlesize=8)
     rc('font', size=6)
@@ -399,8 +583,8 @@ def plot_all(ts):
     ts.plot_lc_pos(ax_lcpos)
     ts.plot_lc_time(ax_lctime)
     ts.plot_lc_white(ax_lcwhite)
-    ts.plot_eclipse(ax_ec)
-    ts.plot_lc(ax_lcfold)
+    ts.plot_eclipse(ax_ec) 
+    ts.plot_pgram(ax_lcfold) # replace with periodogram - to do! 
     ts.plot_fit_and_eo(ax_lcoe)
     ts.plot_info(ax_info)
     ts.plot_lnlike(ax_lnlike)
@@ -411,5 +595,56 @@ def plot_all(ts):
     ax_ec.set_title('Secondary eclipse')
     ax_lcoe[0].set_title('Folded transit and model')
     ax_lcoe[1].set_title('Even and odd transits')
-    ax_lcfold.set_title('Folded light curve')
+    ax_lcfold.set_title('Pulsation Periodogram')
 
+    if save_file is not None:
+        plt.savefig(save_file)
+
+def do_all(kic,auto=True,renormalize=False):
+    tic = clock()
+
+    print('Loading light curve for KIC %d...' % kic)
+    lcs = KeplerLightCurveFile.from_archive(kic,cadence='long')
+    lc = stitch_lc_list(lcs)
+
+    print('Loaded!')
+    min_period=4./24.
+    max_period=30.
+
+    if renormalize:
+        print('Renormalizing...')
+        lc2, powers = sine_renormalize(lc,min_period=min_period, max_period=max_period)
+        print('Renormalized!')
+    else:
+        lc2 = lc
+
+    print('Running CLEAN')
+    if auto == True:
+        lc3, ff, pp, noise, snrs, niter = auto_sine_fit(lc2,prob_max = 1e-20, maxiter=200,min_period=4./24.,max_period=3) 
+        print('Subtracted %d sine waves' % niter)   
+    else:
+        lc3, ff, pp, noise = iterative_sine_fit(lc2, 60,min_period=min_period, max_period=max_period)    
+    print('Cleaned!')
+
+    print('Correcting with CBVs...')
+    lc4 = correct_all(lc3)
+    lc4.pp = pp 
+    lc4.ff = ff
+    try:
+        lc4.niter = niter
+    except:
+        lc4.niter = 60
+    print('Corrected with CBVs!')
+
+    print('Doing Transit Search...')
+    ts = BasicSearch(lc4)
+
+    ts()
+    print('Transit search done!')
+    toc = clock()
+
+    print('Time elapsed: %.2f s' % (toc - tic))
+
+    plot_all(ts,save_file='plots_%d.png' % kic)
+
+    print('Done')
