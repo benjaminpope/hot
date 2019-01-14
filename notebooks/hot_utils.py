@@ -39,6 +39,7 @@ colours = matplotlib.rcParams['axes.prop_cycle'].by_key()['color']
 
 
 def find_cbv(quarter):
+    ## To Do: fit it to the individual module and output
     fname = glob.glob('../data/kplr_cbv/*q%02d*-d25_lcbv.fits' % quarter)[0]
     return fname
     
