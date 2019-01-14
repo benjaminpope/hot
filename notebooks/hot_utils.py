@@ -5,6 +5,7 @@ import fitsio
 
 from astropy.stats import LombScargle
 import astropy.units as u               
+import warnings
 
 # general           
 import copy
@@ -132,8 +133,11 @@ def correct_quarter(lc,quarter):
     basis = np.zeros((lc[m].flux.shape[0],16))
 
     for j in range(16):
-        basis[:,j] = cbvfile[channel]['VECTOR_%d'% (j+1)][cads]
-        
+        try:
+            basis[:,j] = cbvfile[channel]['VECTOR_%d'% (j+1)][cads]
+        except:
+            print('Missing CBV',j)
+
     corrected_flux, weights = cbv.fixed_nb(lc[m].flux, basis, doPlot = False)
 
     return corrected_flux
@@ -350,6 +354,7 @@ class BasicSearch(TransitSearch):
             self.pp = []
             self.ff = []
             self.niter = np.nan
+        self.star_p_range = d.star_p_range
 
         ## Read in the data
         ## ----------------
@@ -466,8 +471,7 @@ class BasicSearch(TransitSearch):
         setp(ax, xticks=[], yticks=[])
 
     def plot_pgram(self,ax):
-        min_period=4./24.
-        max_period=30.
+        min_period, max_period = self.star_p_range
 
         frequency, power = LombScargle(self.time, self.flux_r, self.flux_e).autopower(minimum_frequency=1./max_period,maximum_frequency=1./min_period,
                                                                                    samples_per_peak=10,normalization='psd')
@@ -481,6 +485,7 @@ class BasicSearch(TransitSearch):
         frequency2, power2 = LombScargle(self.time, self.flux, self.flux_e).autopower(minimum_frequency=1./max_period,maximum_frequency=1./min_period,
                                                                                      samples_per_peak=10,normalization='psd')
         ax.plot(frequency2,power2**0.5,color=colours[2])
+        ax.set_xlabel('c/d')
 
     def plot_sde(self, ax=None):
         r = rarr(self.result)
@@ -600,7 +605,7 @@ def plot_all(ts,save_file=None):
     if save_file is not None:
         plt.savefig(save_file)
 
-def do_all(kic,auto=True,renormalize=False):
+def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=(1./24.,30.),niter=60):
     tic = clock()
 
     print('Loading light curve for KIC %d...' % kic)
@@ -608,8 +613,7 @@ def do_all(kic,auto=True,renormalize=False):
     lc = stitch_lc_list(lcs)
 
     print('Loaded!')
-    min_period=4./24.
-    max_period=30.
+    min_period, max_period = star_p_range
 
     if renormalize:
         print('Renormalizing...')
@@ -620,24 +624,23 @@ def do_all(kic,auto=True,renormalize=False):
 
     print('Running CLEAN')
     if auto == True:
-        lc3, ff, pp, noise, snrs, niter = auto_sine_fit(lc2,prob_max = 1e-20, maxiter=200,min_period=4./24.,max_period=3) 
+        lc3, ff, pp, noise, snrs, niter = auto_sine_fit(lc2,prob_max = 1e-20, maxiter=200,min_period=min_period,max_period=max_period) 
         print('Subtracted %d sine waves' % niter)   
     else:
-        lc3, ff, pp, noise = iterative_sine_fit(lc2, 60,min_period=min_period, max_period=max_period)    
+        lc3, ff, pp, noise = iterative_sine_fit(lc2, niter,min_period=min_period, max_period=max_period)    
     print('Cleaned!')
 
     print('Correcting with CBVs...')
     lc4 = correct_all(lc3)
     lc4.pp = pp 
     lc4.ff = ff
-    try:
-        lc4.niter = niter
-    except:
-        lc4.niter = 60
+    lc4.star_p_range = star_p_range
+    lc4.niter = niter
+
     print('Corrected with CBVs!')
 
     print('Doing Transit Search...')
-    ts = BasicSearch(lc4)
+    ts = BasicSearch(lc4,period_range=planet_p_range)
 
     ts()
     print('Transit search done!')
@@ -647,4 +650,32 @@ def do_all(kic,auto=True,renormalize=False):
 
     plot_all(ts,save_file='plots_%d.png' % kic)
 
-    print('Done')
+    print('Done\n')
+
+
+# for scripting
+
+def remove_done(targs,verbose=True):
+    kics = [targ['KIC'] for targ in targs]
+    plots = glob.glob('plots*.png')
+
+    for plot in plots:
+        kic = ''.join([n for n in plot if n.isdigit()])
+
+        if int(kic) in kics:
+            if verbose:
+                print('Done',kic)
+            j = kics.index(int(kic))
+            kics.remove(int(kic))
+            targs.remove(targs[j])
+    return targs
+
+def parallel_search(obj):
+    warnings.filterwarnings('ignore')
+    kic = obj['KIC']
+    period, pm, pp = obj['P','e_P','E_P']
+    print(kic, period)
+    try:
+        do_all(kic,star_p_range=(1./24,3.),planet_p_range=(period-4*pm,period+4*pm))
+    except:
+        print('Failed on',kic)
