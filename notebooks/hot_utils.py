@@ -606,7 +606,7 @@ def plot_all(ts,save_file=None):
     if save_file is not None:
         plt.savefig(save_file)
 
-def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=(1./24.,30.),niter=60):
+def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=(1./24.,30.),niter=60,figtype='png'):
     tic = clock()
 
     print('Loading light curve for KIC %d...' % kic)
@@ -649,7 +649,7 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
 
     print('Time elapsed: %.2f s' % (toc - tic))
 
-    plot_all(ts,save_file='plots_%d.png' % kic)
+    plot_all(ts,save_file='plots_%d.%s' % (kic,figtype))
 
     print('Done\n')
 
