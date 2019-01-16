@@ -88,6 +88,11 @@
 \newcommand\kepler{\emph{Kepler}\,}
 \newcommand\ktwo{\emph{K2}\,}
 
+\usepackage{xcolor, fontawesome}
+\definecolor{twitterblue}{RGB}{64,153,255}
+\newcommand\twitter[1]{\href{https://twitter.com/#1 }{\textcolor{twitterblue}{\faTwitter}\,\tt \textcolor{twitterblue}{@#1}}}
+
+
 %% Tells LaTeX to search for image files in the 
 %% current directory as well as in the figures/ folder.
 \graphicspath{{./}{figures/}}
@@ -150,7 +155,7 @@
 
 \title{A Search for Transits Across Pulsating Stars}
 
-\correspondingauthor{Benjamin J. S. Pope}
+\correspondingauthor{Benjamin J. S. Pope \twitter{fringetracker}}
 \email{benjamin.pope@nyu}
 
 \author[0000-0003-2595-9114]{Benjamin J. S. Pope}
