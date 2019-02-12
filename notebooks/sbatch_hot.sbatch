@@ -12,8 +12,8 @@ if [ "$SLURM_ARRAY_TASK_ID" == "" ]; then exit; fi
 module purge
 module load anaconda3/5.3.1
 
-pip install astropy fitsio lightkurve --user
-pip install https://github.com/dfm/acor/archive/master.zip https://github.com/OxES/OxKeplerSC/archive/master.zip --user
+# pip install astropy fitsio lightkurve --user # should be ok for my own login but uncomment if you need to install
+# pip install https://github.com/dfm/acor/archive/master.zip https://github.com/OxES/OxKeplerSC/archive/master.zip --user
 
 i=0
 while read -r line; do
