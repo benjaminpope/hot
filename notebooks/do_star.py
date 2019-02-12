@@ -46,4 +46,4 @@ if __name__ == '__main__':
 
     args = ap.parse_args()
 
-    do_all(args.kic,planet_p_range=(args.planet_p_min,args.planet_p_max),renormalize=True,outdir=outdir)
+    do_all(args.kic,planet_p_range=(args.planet_p_min,args.planet_p_max),renormalize=True,outdir=args.outdir)
