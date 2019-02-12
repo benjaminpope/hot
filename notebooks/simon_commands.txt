@@ -1,315 +1,315 @@
-do_star.py 10001145 --planet-p-min 111.27000 --planet-p-max 114.63000
-do_star.py 10029999 --planet-p-min 183.99000 --planet-p-max 187.91000
-do_star.py 10031634 --planet-p-min 467.40000 --planet-p-max 495.40000
-do_star.py 10056297 --planet-p-min 613.50000 --planet-p-max 626.30000
-do_star.py 10056931 --planet-p-min 913.80000 --planet-p-max 941.80000
-do_star.py 10154094 --planet-p-min 871.10000 --planet-p-max 915.10000
-do_star.py 10206643 --planet-p-min 403.40000 --planet-p-max 422.60000
-do_star.py 10224920 --planet-p-min 994.00000 --planet-p-max 1106.00000
-do_star.py 10273384 --planet-p-min 1190.00000 --planet-p-max 2950.00000
-do_star.py 10416779 --planet-p-min 1150.00000 --planet-p-max 1422.00000
-do_star.py 10451090 --planet-p-min 951.80000 --planet-p-max 1011.00000
-do_star.py 10468883 --planet-p-min 1542.00000 --planet-p-max 1638.00000
-do_star.py 10532771 --planet-p-min 580.50000 --planet-p-max 589.30000
-do_star.py 10538299 --planet-p-min 81.82800 --planet-p-max 82.06800
-do_star.py 10549422 --planet-p-min 2587.00000 --planet-p-max 4027.00000
-do_star.py 10679429 --planet-p-min 670.50000 --planet-p-max 688.90000
-do_star.py 10717871 --planet-p-min 173.79000 --planet-p-max 176.75000
-do_star.py 10727717 --planet-p-min 926.70000 --planet-p-max 984.30000
-do_star.py 10753246 --planet-p-min 376.00000 --planet-p-max 3816.00000
-do_star.py 10802820 --planet-p-min 1012.00000 --planet-p-max 1356.00000
-do_star.py 10855535 --planet-p-min 410.44000 --planet-p-max 413.40000
-do_star.py 10862354 --planet-p-min 463.30000 --planet-p-max 476.10000
-do_star.py 10936474 --planet-p-min 149.90000 --planet-p-max 154.70000
-do_star.py 10990452 --planet-p-min 121.70000 --planet-p-max 122.50000
-do_star.py 11044384 --planet-p-min 1004.00000 --planet-p-max 2524.00000
-do_star.py 11285767 --planet-p-min 718.10000 --planet-p-max 730.10000
-do_star.py 11294931 --planet-p-min 1376.00000 --planet-p-max 1568.00000
-do_star.py 11295729 --planet-p-min 1108.00000 --planet-p-max 1268.00000
-do_star.py 11415556 --planet-p-min 143.80000 --planet-p-max 146.20000
-do_star.py 11495305 --planet-p-min 842.40000 --planet-p-max 868.80000
-do_star.py 11508397 --planet-p-min 650.00000 --planet-p-max 794.00000
-do_star.py 11509728 --planet-p-min 196.21000 --planet-p-max 201.97000
-do_star.py 11569628 --planet-p-min 666.80000 --planet-p-max 702.00000
-do_star.py 11661993 --planet-p-min 545.50000 --planet-p-max 608.70000
-do_star.py 11754974 --planet-p-min 341.20000 --planet-p-max 345.20000
-do_star.py 11771670 --planet-p-min 553.50000 --planet-p-max 564.70000
-do_star.py 11858293 --planet-p-min 503.22000 --planet-p-max 508.34000
-do_star.py 11874676 --planet-p-min 1444.00000 --planet-p-max 1780.00000
-do_star.py 11905761 --planet-p-min 223.90000 --planet-p-max 226.94000
-do_star.py 12020590 --planet-p-min 429.56000 --planet-p-max 435.24000
-do_star.py 12055345 --planet-p-min 1169.00000 --planet-p-max 1497.00000
-do_star.py 12069252 --planet-p-min 1103.00000 --planet-p-max 1895.00000
-do_star.py 12120077 --planet-p-min 1495.00000 --planet-p-max 1783.00000
-do_star.py 12122075 --planet-p-min 262.80000 --planet-p-max 279.60000
-do_star.py 12217281 --planet-p-min 678.00000 --planet-p-max 774.00000
-do_star.py 12365420 --planet-p-min 327.40000 --planet-p-max 333.64000
-do_star.py 12470709 --planet-p-min 1361.00000 --planet-p-max 1545.00000
-do_star.py 12602250 --planet-p-min 583.88000 --planet-p-max 588.28000
-do_star.py 1294670 --planet-p-min 407.91000 --planet-p-max 412.23000
-do_star.py 1724961 --planet-p-min 74.17100 --planet-p-max 74.50700
-do_star.py 2168333 --planet-p-min 347.95000 --planet-p-max 351.55000
-do_star.py 2283124 --planet-p-min 1189.00000 --planet-p-max 1869.00000
-do_star.py 2570760 --planet-p-min 1361.00000 --planet-p-max 1737.00000
-do_star.py 2579147 --planet-p-min 1408.00000 --planet-p-max 1744.00000
-do_star.py 2714707 --planet-p-min 530.70000 --planet-p-max 549.90000
-do_star.py 2974815 --planet-p-min 1043.00000 --planet-p-max 1094.20000
-do_star.py 2988145 --planet-p-min 787.00000 --planet-p-max 799.00000
-do_star.py 2994888 --planet-p-min 1076.00000 --planet-p-max 1164.00000
-do_star.py 3223460 --planet-p-min 976.00000 --planet-p-max 1104.00000
-do_star.py 3346195 --planet-p-min 397.90000 --planet-p-max 402.62000
-do_star.py 3426991 --planet-p-min 1057.10000 --planet-p-max 1094.70000
-do_star.py 3542566 --planet-p-min 902.50000 --planet-p-max 916.90000
-do_star.py 3546765 --planet-p-min 534.00000 --planet-p-max 544.40000
-do_star.py 3641023 --planet-p-min 354.10000 --planet-p-max 363.70000
-do_star.py 3650057 --planet-p-min 801.90000 --planet-p-max 819.50000
-do_star.py 3655115 --planet-p-min 298.88000 --planet-p-max 302.64000
-do_star.py 3655513 --planet-p-min 271.60000 --planet-p-max 277.60000
-do_star.py 3749833 --planet-p-min 1031.80000 --planet-p-max 1071.00000
-do_star.py 3757814 --planet-p-min 1321.00000 --planet-p-max 2761.00000
-do_star.py 3760002 --planet-p-min 453.70000 --planet-p-max 462.50000
-do_star.py 3762741 --planet-p-min 1008.00000 --planet-p-max 1432.00000
-do_star.py 3763579 --planet-p-min 859.00000 --planet-p-max 2619.00000
-do_star.py 3833853 --planet-p-min 440.80000 --planet-p-max 452.80000
-do_star.py 3849354 --planet-p-min 109.17900 --planet-p-max 109.94700
-do_star.py 3851151 --planet-p-min 253.00000 --planet-p-max 4093.00000
-do_star.py 3969800 --planet-p-min 676.00000 --planet-p-max 780.00000
-do_star.py 3975085 --planet-p-min 908.50000 --planet-p-max 934.10000
-do_star.py 4077275 --planet-p-min 423.10000 --planet-p-max 499.10000
-do_star.py 4078743 --planet-p-min 1367.00000 --planet-p-max 1775.00000
-do_star.py 4141155 --planet-p-min 260.08000 --planet-p-max 262.24000
-do_star.py 4168574 --planet-p-min 1321.00000 --planet-p-max 1745.00000
-do_star.py 4170631 --planet-p-min 172.44000 --planet-p-max 178.12000
-do_star.py 4171102 --planet-p-min 768.00000 --planet-p-max 976.00000
-do_star.py 4180199 --planet-p-min 606.00000 --planet-p-max 4046.00000
-do_star.py 4243461 --planet-p-min 474.20000 --planet-p-max 488.60000
-do_star.py 4243984 --planet-p-min 549.40000 --planet-p-max 558.20000
-do_star.py 4253860 --planet-p-min 154.58900 --planet-p-max 155.32500
-do_star.py 4269337 --planet-p-min 671.20000 --planet-p-max 679.20000
-do_star.py 4277242 --planet-p-min 330.50000 --planet-p-max 373.70000
-do_star.py 4283747 --planet-p-min 1044.00000 --planet-p-max 1148.00000
-do_star.py 4372410 --planet-p-min 989.00000 --planet-p-max 1197.00000
-do_star.py 4380834 --planet-p-min 437.60000 --planet-p-max 448.00000
-do_star.py 4381221 --planet-p-min 180.19000 --planet-p-max 181.23000
-do_star.py 4386091 --planet-p-min 312.00000 --planet-p-max 600.00000
-do_star.py 4456107 --planet-p-min 333.76000 --planet-p-max 337.68000
-do_star.py 4476836 --planet-p-min 767.00000 --planet-p-max 786.20000
-do_star.py 4574142 --planet-p-min 227.78000 --planet-p-max 232.98000
-do_star.py 4575908 --planet-p-min 1559.00000 --planet-p-max 3319.00000
-do_star.py 4587528 --planet-p-min 707.20000 --planet-p-max 772.00000
-do_star.py 4647763 --planet-p-min 1624.00000 --planet-p-max 2584.00000
-do_star.py 4862968 --planet-p-min 38.30000 --planet-p-max 39.04400
-do_star.py 4902475 --planet-p-min 969.80000 --planet-p-max 985.80000
-do_star.py 4937435 --planet-p-min 1377.60000 --planet-p-max 1449.60000
-do_star.py 4950985 --planet-p-min 772.00000 --planet-p-max 876.00000
-do_star.py 5022451 --planet-p-min 227.70000 --planet-p-max 233.78000
-do_star.py 5176531 --planet-p-min 832.90000 --planet-p-max 861.70000
-do_star.py 5196851 --planet-p-min 1107.00000 --planet-p-max 1195.00000
-do_star.py 5212962 --planet-p-min 513.92000 --planet-p-max 520.72000
-do_star.py 5219533 --planet-p-min 1519.00000 --planet-p-max 1623.00000
-do_star.py 5253740 --planet-p-min 668.80000 --planet-p-max 699.20000
-do_star.py 5271224 --planet-p-min 40.33100 --planet-p-max 40.70700
-do_star.py 5272673 --planet-p-min 1179.00000 --planet-p-max 1259.00000
-do_star.py 5295234 --planet-p-min 577.00000 --planet-p-max 2737.00000
-do_star.py 5302006 --planet-p-min 716.40000 --planet-p-max 751.60000
-do_star.py 5304634 --planet-p-min 1861.00000 --planet-p-max 2341.00000
-do_star.py 5355850 --planet-p-min 1105.50000 --planet-p-max 1128.70000
-do_star.py 5358323 --planet-p-min 309.10000 --planet-p-max 313.26000
-do_star.py 5370646 --planet-p-min 370.73000 --planet-p-max 377.69000
-do_star.py 5376614 --planet-p-min 709.00000 --planet-p-max 3429.00000
-do_star.py 5385469 --planet-p-min 1976.00000 --planet-p-max 3016.00000
-do_star.py 5394574 --planet-p-min 335.35000 --planet-p-max 338.23000
-do_star.py 5459805 --planet-p-min 1172.00000 --planet-p-max 1644.00000
-do_star.py 5475668 --planet-p-min 137.82800 --planet-p-max 138.26800
-do_star.py 5542211 --planet-p-min 711.10000 --planet-p-max 746.30000
-do_star.py 5545566 --planet-p-min 174.45000 --planet-p-max 179.73000
-do_star.py 5641605 --planet-p-min 1133.00000 --planet-p-max 1237.00000
-do_star.py 5647514 --planet-p-min 1078.40000 --planet-p-max 1149.60000
-do_star.py 5705575 --planet-p-min 534.10000 --planet-p-max 541.22000
-do_star.py 5709664 --planet-p-min 94.85800 --planet-p-max 95.20200
-do_star.py 5723310 --planet-p-min 1231.40000 --planet-p-max 1305.80000
-do_star.py 5725312 --planet-p-min 686.80000 --planet-p-max 722.80000
-do_star.py 5728217 --planet-p-min 222.93000 --planet-p-max 226.61000
-do_star.py 5733154 --planet-p-min 62.03000 --planet-p-max 63.07000
-do_star.py 5734003 --planet-p-min 840.00000 --planet-p-max 1616.00000
-do_star.py 5737687 --planet-p-min 996.00000 --planet-p-max 1140.00000
-do_star.py 5738127 --planet-p-min 432.20000 --planet-p-max 453.00000
-do_star.py 5768203 --planet-p-min 183.30000 --planet-p-max 184.18000
-do_star.py 5791786 --planet-p-min 118.50000 --planet-p-max 120.10000
-do_star.py 5808231 --planet-p-min 1037.00000 --planet-p-max 1125.00000
-do_star.py 5811454 --planet-p-min 1078.00000 --planet-p-max 1342.00000
-do_star.py 5819178 --planet-p-min 235.55000 --planet-p-max 239.71000
-do_star.py 5857714 --planet-p-min 78.55000 --planet-p-max 79.91000
-do_star.py 5857714 --planet-p-min 981.00000 --planet-p-max 1036.20000
-do_star.py 5879187 --planet-p-min 1545.00000 --planet-p-max 4025.00000
-do_star.py 5880352 --planet-p-min 175.81000 --planet-p-max 178.13000
-do_star.py 5891975 --planet-p-min 833.00000 --planet-p-max 969.00000
-do_star.py 5892660 --planet-p-min 1345.00000 --planet-p-max 1785.00000
-do_star.py 5900260 --planet-p-min 159.12000 --planet-p-max 160.48000
-do_star.py 5964173 --planet-p-min 1126.00000 --planet-p-max 1342.00000
-do_star.py 5988140 --planet-p-min 3017.00000 --planet-p-max 5577.00000
-do_star.py 6041680 --planet-p-min 667.20000 --planet-p-max 680.00000
-do_star.py 6115466 --planet-p-min 718.42000 --planet-p-max 723.46000
-do_star.py 6139591 --planet-p-min 1178.00000 --planet-p-max 1442.00000
-do_star.py 6141372 --planet-p-min 462.00000 --planet-p-max 4782.00000
-do_star.py 6206125 --planet-p-min 171.77000 --planet-p-max 173.93000
-do_star.py 6222529 --planet-p-min 171.15000 --planet-p-max 174.27000
-do_star.py 6229130 --planet-p-min 597.50000 --planet-p-max 627.10000
-do_star.py 6229502 --planet-p-min 1273.00000 --planet-p-max 1369.00000
-do_star.py 6230921 --planet-p-min 1012.00000 --planet-p-max 5412.00000
-do_star.py 6231538 --planet-p-min 355.00000 --planet-p-max 7395.00000
-do_star.py 6233899 --planet-p-min 761.00000 --planet-p-max 2761.00000
-do_star.py 6280952 --planet-p-min 1035.30000 --planet-p-max 1055.30000
-do_star.py 6287172 --planet-p-min 1836.00000 --planet-p-max 2252.00000
-do_star.py 6290411 --planet-p-min 992.70000 --planet-p-max 1037.50000
-do_star.py 6302589 --planet-p-min 1024.60000 --planet-p-max 1039.80000
-do_star.py 6314475 --planet-p-min 403.40000 --planet-p-max 413.00000
-do_star.py 6367159 --planet-p-min 277.80000 --planet-p-max 285.80000
-do_star.py 6451876 --planet-p-min 915.60000 --planet-p-max 959.60000
-do_star.py 6467639 --planet-p-min 21.30500 --planet-p-max 21.40900
-do_star.py 6470973 --planet-p-min 1364.00000 --planet-p-max 2244.00000
-do_star.py 6522144 --planet-p-min 986.90000 --planet-p-max 1046.90000
-do_star.py 6586020 --planet-p-min 179.00000 --planet-p-max 443.00000
-do_star.py 6586333 --planet-p-min 395.70000 --planet-p-max 424.50000
-do_star.py 6604303 --planet-p-min 1164.00000 --planet-p-max 3564.00000
-do_star.py 6629106 --planet-p-min 399.15000 --planet-p-max 405.47000
-do_star.py 6633452 --planet-p-min 1124.00000 --planet-p-max 1332.00000
-do_star.py 6668729 --planet-p-min 1136.80000 --planet-p-max 1191.20000
-do_star.py 6671321 --planet-p-min 670.30000 --planet-p-max 678.30000
-do_star.py 6678614 --planet-p-min 832.00000 --planet-p-max 976.00000
-do_star.py 6756386 --planet-p-min 130.57000 --planet-p-max 138.25000
-do_star.py 6762992 --planet-p-min 684.20000 --planet-p-max 701.00000
-do_star.py 6854623 --planet-p-min 979.00000 --planet-p-max 1155.00000
-do_star.py 6861400 --planet-p-min 2066.00000 --planet-p-max 2698.00000
-do_star.py 6862920 --planet-p-min 61.30200 --planet-p-max 61.68600
-do_star.py 6865077 --planet-p-min 446.18000 --planet-p-max 447.78000
-do_star.py 6877609 --planet-p-min 52.59000 --planet-p-max 52.71800
-do_star.py 6922995 --planet-p-min 1187.00000 --planet-p-max 2067.00000
-do_star.py 6935101 --planet-p-min 928.10000 --planet-p-max 1000.90000
-do_star.py 6939291 --planet-p-min 954.45000 --planet-p-max 959.41000
-do_star.py 7051690 --planet-p-min 1085.40000 --planet-p-max 1123.00000
-do_star.py 7060333 --planet-p-min 998.40000 --planet-p-max 1027.20000
-do_star.py 7124680 --planet-p-min 107.71000 --planet-p-max 108.83000
-do_star.py 7173839 --planet-p-min 351.70000 --planet-p-max 363.70000
-do_star.py 7219502 --planet-p-min 831.40000 --planet-p-max 905.00000
-do_star.py 7271892 --planet-p-min 191.95000 --planet-p-max 197.87000
-do_star.py 7289158 --planet-p-min 545.70000 --planet-p-max 578.50000
-do_star.py 7368960 --planet-p-min 1010.00000 --planet-p-max 1050.80000
-do_star.py 7456441 --planet-p-min 97.42000 --planet-p-max 98.14000
-do_star.py 7467518 --planet-p-min 611.30000 --planet-p-max 620.10000
-do_star.py 7467539 --planet-p-min 1297.00000 --planet-p-max 1497.00000
-do_star.py 7502559 --planet-p-min 626.00000 --planet-p-max 664.40000
-do_star.py 7549852 --planet-p-min 70.45500 --planet-p-max 71.07900
-do_star.py 7551993 --planet-p-min 337.38000 --planet-p-max 339.54000
-do_star.py 7583208 --planet-p-min 232.19000 --planet-p-max 239.47000
-do_star.py 7618364 --planet-p-min 2497.00000 --planet-p-max 4337.00000
-do_star.py 7668791 --planet-p-min 2019.00000 --planet-p-max 3779.00000
-do_star.py 7703305 --planet-p-min 174.51000 --planet-p-max 180.19000
-do_star.py 7773133 --planet-p-min 560.40000 --planet-p-max 571.60000
-do_star.py 7819024 --planet-p-min 212.59000 --planet-p-max 219.23000
-do_star.py 7841434 --planet-p-min 81.69800 --planet-p-max 82.46600
-do_star.py 7848288 --planet-p-min 596.34000 --planet-p-max 602.58000
-do_star.py 7917485 --planet-p-min 760.00000 --planet-p-max 920.00000
-do_star.py 7956461 --planet-p-min 77.81000 --planet-p-max 78.77000
-do_star.py 7975162 --planet-p-min 740.90000 --planet-p-max 807.30000
-do_star.py 7977996 --planet-p-min 1298.00000 --planet-p-max 1714.00000
-do_star.py 8004558 --planet-p-min 258.52000 --planet-p-max 260.20000
-do_star.py 8018827 --planet-p-min 209.39000 --planet-p-max 211.31000
-do_star.py 8022144 --planet-p-min 1414.00000 --planet-p-max 1542.00000
-do_star.py 8029546 --planet-p-min 499.80000 --planet-p-max 514.20000
-do_star.py 8043436 --planet-p-min 11.00000 --planet-p-max 3051.00000
-do_star.py 8045121 --planet-p-min 916.70000 --planet-p-max 936.70000
-do_star.py 8086490 --planet-p-min 1103.00000 --planet-p-max 1983.00000
-do_star.py 8098120 --planet-p-min 766.60000 --planet-p-max 802.60000
-do_star.py 8106371 --planet-p-min 1048.00000 --planet-p-max 1116.80000
-do_star.py 8120184 --planet-p-min 546.60000 --planet-p-max 557.80000
-do_star.py 8121586 --planet-p-min 1088.90000 --planet-p-max 1160.90000
-do_star.py 8122232 --planet-p-min 1198.00000 --planet-p-max 1526.00000
-do_star.py 8196840 --planet-p-min 1666.00000 --planet-p-max 2026.00000
-do_star.py 8197355 --planet-p-min 844.10000 --planet-p-max 857.70000
-do_star.py 8197653 --planet-p-min 413.70000 --planet-p-max 428.10000
-do_star.py 8235853 --planet-p-min 546.40000 --planet-p-max 561.60000
-do_star.py 8256621 --planet-p-min 1039.30000 --planet-p-max 1072.10000
-do_star.py 8264492 --planet-p-min 251.41000 --planet-p-max 252.77000
-do_star.py 8264588 --planet-p-min 183.26000 --planet-p-max 186.38000
-do_star.py 8264588 --planet-p-min 964.00000 --planet-p-max 1060.00000
-do_star.py 8292150 --planet-p-min 582.80000 --planet-p-max 591.60000
-do_star.py 8299332 --planet-p-min 777.30000 --planet-p-max 810.90000
-do_star.py 8308688 --planet-p-min 887.10000 --planet-p-max 910.30000
-do_star.py 8311110 --planet-p-min 155.79000 --planet-p-max 156.83000
-do_star.py 8314525 --planet-p-min 2157.00000 --planet-p-max 3037.00000
-do_star.py 8329014 --planet-p-min 354.62000 --planet-p-max 359.10000
-do_star.py 8329629 --planet-p-min 1077.90000 --planet-p-max 1114.70000
-do_star.py 8330102 --planet-p-min 3465.00000 --planet-p-max 3905.00000
-do_star.py 8346686 --planet-p-min 779.50000 --planet-p-max 792.30000
-do_star.py 8352420 --planet-p-min 1378.00000 --planet-p-max 1474.00000
-do_star.py 8396062 --planet-p-min 162.18000 --planet-p-max 165.94000
-do_star.py 8459354 --planet-p-min 53.47100 --planet-p-max 53.64700
-do_star.py 8460126 --planet-p-min 288.20000 --planet-p-max 298.60000
-do_star.py 8491816 --planet-p-min 1409.00000 --planet-p-max 1601.00000
-do_star.py 8500899 --planet-p-min 1054.40000 --planet-p-max 1104.00000
-do_star.py 8516686 --planet-p-min 171.10000 --planet-p-max 172.30000
-do_star.py 8552907 --planet-p-min 480.40000 --planet-p-max 493.20000
-do_star.py 8560996 --planet-p-min 1263.00000 --planet-p-max 2223.00000
-do_star.py 8563964 --planet-p-min 1149.50000 --planet-p-max 1227.10000
-do_star.py 8565229 --planet-p-min 32.54200 --planet-p-max 32.71800
-do_star.py 8583770 --planet-p-min 1443.00000 --planet-p-max 1819.00000
-do_star.py 8630254 --planet-p-min 817.00000 --planet-p-max 921.00000
-do_star.py 8653100 --planet-p-min 915.80000 --planet-p-max 956.60000
-do_star.py 8682555 --planet-p-min 489.90000 --planet-p-max 504.30000
-do_star.py 8752359 --planet-p-min 1131.00000 --planet-p-max 4571.00000
-do_star.py 8771498 --planet-p-min 331.18000 --planet-p-max 338.94000
-do_star.py 8772391 --planet-p-min 378.30000 --planet-p-max 395.10000
-do_star.py 8826718 --planet-p-min 509.47000 --planet-p-max 514.75000
-do_star.py 8914322 --planet-p-min 1432.00000 --planet-p-max 1928.00000
-do_star.py 8933391 --planet-p-min 210.84000 --planet-p-max 214.76000
-do_star.py 8940640 --planet-p-min 38.76700 --planet-p-max 39.28700
-do_star.py 8956850 --planet-p-min 1289.10000 --planet-p-max 1357.10000
-do_star.py 8964755 --planet-p-min 260.25000 --planet-p-max 263.93000
-do_star.py 8975515 --planet-p-min 465.00000 --planet-p-max 3345.00000
-do_star.py 9020199 --planet-p-min 31.20300 --planet-p-max 31.37100
-do_star.py 9054553 --planet-p-min 280.70000 --planet-p-max 292.70000
-do_star.py 9092897 --planet-p-min 1175.00000 --planet-p-max 1287.00000
-do_star.py 9094694 --planet-p-min 1260.00000 --planet-p-max 1444.00000
-do_star.py 9108615 --planet-p-min 2400.00000 --planet-p-max 2888.00000
-do_star.py 9172627 --planet-p-min 739.00000 --planet-p-max 859.00000
-do_star.py 9201644 --planet-p-min 47.18100 --planet-p-max 47.56500
-do_star.py 9207344 --planet-p-min 733.50000 --planet-p-max 742.30000
-do_star.py 9210037 --planet-p-min 438.10000 --planet-p-max 463.70000
-do_star.py 9265050 --planet-p-min 1036.30000 --planet-p-max 1061.10000
-do_star.py 9331207 --planet-p-min 126.34000 --planet-p-max 127.46000
-do_star.py 9367382 --planet-p-min 154.46000 --planet-p-max 156.14000
-do_star.py 9450392 --planet-p-min 1657.00000 --planet-p-max 3097.00000
-do_star.py 9466030 --planet-p-min 1121.60000 --planet-p-max 1186.40000
-do_star.py 9473000 --planet-p-min 766.48000 --planet-p-max 773.44000
-do_star.py 9526946 --planet-p-min 930.30000 --planet-p-max 951.10000
-do_star.py 9550886 --planet-p-min 1514.00000 --planet-p-max 1714.00000
-do_star.py 9578461 --planet-p-min 703.80000 --planet-p-max 727.00000
-do_star.py 9594022 --planet-p-min 411.30000 --planet-p-max 414.58000
-do_star.py 9636283 --planet-p-min 895.80000 --planet-p-max 940.60000
-do_star.py 9649801 --planet-p-min 1137.70000 --planet-p-max 1184.90000
-do_star.py 9651065 --planet-p-min 271.20000 --planet-p-max 273.60000
-do_star.py 9655422 --planet-p-min 186.23000 --planet-p-max 192.63000
-do_star.py 9655501 --planet-p-min 792.70000 --planet-p-max 842.30000
-do_star.py 9655514 --planet-p-min 321.22000 --planet-p-max 327.14000
-do_star.py 9655909 --planet-p-min 1951.00000 --planet-p-max 3871.00000
-do_star.py 9666465 --planet-p-min 1585.00000 --planet-p-max 2465.00000
-do_star.py 9693282 --planet-p-min 767.00000 --planet-p-max 3007.00000
-do_star.py 9699950 --planet-p-min 183.78000 --planet-p-max 186.58000
-do_star.py 9722737 --planet-p-min 442.17000 --planet-p-max 446.01000
-do_star.py 9774314 --planet-p-min 600.54000 --planet-p-max 608.22000
-do_star.py 9791112 --planet-p-min 1228.00000 --planet-p-max 1836.00000
-do_star.py 9812351 --planet-p-min 166.60000 --planet-p-max 169.00000
-do_star.py 9813078 --planet-p-min 1156.00000 --planet-p-max 1476.00000
-do_star.py 9823602 --planet-p-min 649.00000 --planet-p-max 687.40000
-do_star.py 9823652 --planet-p-min 1262.30000 --planet-p-max 1341.50000
-do_star.py 9837267 --planet-p-min 60.02000 --planet-p-max 63.14000
-do_star.py 9837659 --planet-p-min 1203.00000 --planet-p-max 2483.00000
-do_star.py 9844791 --planet-p-min 205.99000 --planet-p-max 210.95000
-do_star.py 9850393 --planet-p-min 296.41000 --planet-p-max 301.45000
-do_star.py 9874181 --planet-p-min 562.60000 --planet-p-max 575.40000
-do_star.py 9895857 --planet-p-min 222.94000 --planet-p-max 225.18000
-do_star.py 9897089 --planet-p-min 1184.00000 --planet-p-max 1984.00000
-do_star.py 9936518 --planet-p-min 274.20000 --planet-p-max 285.40000
-do_star.py 9953617 --planet-p-min 1075.00000 --planet-p-max 1179.00000
-do_star.py 9963609 --planet-p-min 879.60000 --planet-p-max 918.00000
+python do_star.py 10001145 --planet-p-min 111.27000 --planet-p-max 114.63000
+python do_star.py 10029999 --planet-p-min 183.99000 --planet-p-max 187.91000
+python do_star.py 10031634 --planet-p-min 467.40000 --planet-p-max 495.40000
+python do_star.py 10056297 --planet-p-min 613.50000 --planet-p-max 626.30000
+python do_star.py 10056931 --planet-p-min 913.80000 --planet-p-max 941.80000
+python do_star.py 10154094 --planet-p-min 871.10000 --planet-p-max 915.10000
+python do_star.py 10206643 --planet-p-min 403.40000 --planet-p-max 422.60000
+python do_star.py 10224920 --planet-p-min 994.00000 --planet-p-max 1106.00000
+python do_star.py 10273384 --planet-p-min 1190.00000 --planet-p-max 2950.00000
+python do_star.py 10416779 --planet-p-min 1150.00000 --planet-p-max 1422.00000
+python do_star.py 10451090 --planet-p-min 951.80000 --planet-p-max 1011.00000
+python do_star.py 10468883 --planet-p-min 1542.00000 --planet-p-max 1638.00000
+python do_star.py 10532771 --planet-p-min 580.50000 --planet-p-max 589.30000
+python do_star.py 10538299 --planet-p-min 81.82800 --planet-p-max 82.06800
+python do_star.py 10549422 --planet-p-min 2587.00000 --planet-p-max 4027.00000
+python do_star.py 10679429 --planet-p-min 670.50000 --planet-p-max 688.90000
+python do_star.py 10717871 --planet-p-min 173.79000 --planet-p-max 176.75000
+python do_star.py 10727717 --planet-p-min 926.70000 --planet-p-max 984.30000
+python do_star.py 10753246 --planet-p-min 376.00000 --planet-p-max 3816.00000
+python do_star.py 10802820 --planet-p-min 1012.00000 --planet-p-max 1356.00000
+python do_star.py 10855535 --planet-p-min 410.44000 --planet-p-max 413.40000
+python do_star.py 10862354 --planet-p-min 463.30000 --planet-p-max 476.10000
+python do_star.py 10936474 --planet-p-min 149.90000 --planet-p-max 154.70000
+python do_star.py 10990452 --planet-p-min 121.70000 --planet-p-max 122.50000
+python do_star.py 11044384 --planet-p-min 1004.00000 --planet-p-max 2524.00000
+python do_star.py 11285767 --planet-p-min 718.10000 --planet-p-max 730.10000
+python do_star.py 11294931 --planet-p-min 1376.00000 --planet-p-max 1568.00000
+python do_star.py 11295729 --planet-p-min 1108.00000 --planet-p-max 1268.00000
+python do_star.py 11415556 --planet-p-min 143.80000 --planet-p-max 146.20000
+python do_star.py 11495305 --planet-p-min 842.40000 --planet-p-max 868.80000
+python do_star.py 11508397 --planet-p-min 650.00000 --planet-p-max 794.00000
+python do_star.py 11509728 --planet-p-min 196.21000 --planet-p-max 201.97000
+python do_star.py 11569628 --planet-p-min 666.80000 --planet-p-max 702.00000
+python do_star.py 11661993 --planet-p-min 545.50000 --planet-p-max 608.70000
+python do_star.py 11754974 --planet-p-min 341.20000 --planet-p-max 345.20000
+python do_star.py 11771670 --planet-p-min 553.50000 --planet-p-max 564.70000
+python do_star.py 11858293 --planet-p-min 503.22000 --planet-p-max 508.34000
+python do_star.py 11874676 --planet-p-min 1444.00000 --planet-p-max 1780.00000
+python do_star.py 11905761 --planet-p-min 223.90000 --planet-p-max 226.94000
+python do_star.py 12020590 --planet-p-min 429.56000 --planet-p-max 435.24000
+python do_star.py 12055345 --planet-p-min 1169.00000 --planet-p-max 1497.00000
+python do_star.py 12069252 --planet-p-min 1103.00000 --planet-p-max 1895.00000
+python do_star.py 12120077 --planet-p-min 1495.00000 --planet-p-max 1783.00000
+python do_star.py 12122075 --planet-p-min 262.80000 --planet-p-max 279.60000
+python do_star.py 12217281 --planet-p-min 678.00000 --planet-p-max 774.00000
+python do_star.py 12365420 --planet-p-min 327.40000 --planet-p-max 333.64000
+python do_star.py 12470709 --planet-p-min 1361.00000 --planet-p-max 1545.00000
+python do_star.py 12602250 --planet-p-min 583.88000 --planet-p-max 588.28000
+python do_star.py 1294670 --planet-p-min 407.91000 --planet-p-max 412.23000
+python do_star.py 1724961 --planet-p-min 74.17100 --planet-p-max 74.50700
+python do_star.py 2168333 --planet-p-min 347.95000 --planet-p-max 351.55000
+python do_star.py 2283124 --planet-p-min 1189.00000 --planet-p-max 1869.00000
+python do_star.py 2570760 --planet-p-min 1361.00000 --planet-p-max 1737.00000
+python do_star.py 2579147 --planet-p-min 1408.00000 --planet-p-max 1744.00000
+python do_star.py 2714707 --planet-p-min 530.70000 --planet-p-max 549.90000
+python do_star.py 2974815 --planet-p-min 1043.00000 --planet-p-max 1094.20000
+python do_star.py 2988145 --planet-p-min 787.00000 --planet-p-max 799.00000
+python do_star.py 2994888 --planet-p-min 1076.00000 --planet-p-max 1164.00000
+python do_star.py 3223460 --planet-p-min 976.00000 --planet-p-max 1104.00000
+python do_star.py 3346195 --planet-p-min 397.90000 --planet-p-max 402.62000
+python do_star.py 3426991 --planet-p-min 1057.10000 --planet-p-max 1094.70000
+python do_star.py 3542566 --planet-p-min 902.50000 --planet-p-max 916.90000
+python do_star.py 3546765 --planet-p-min 534.00000 --planet-p-max 544.40000
+python do_star.py 3641023 --planet-p-min 354.10000 --planet-p-max 363.70000
+python do_star.py 3650057 --planet-p-min 801.90000 --planet-p-max 819.50000
+python do_star.py 3655115 --planet-p-min 298.88000 --planet-p-max 302.64000
+python do_star.py 3655513 --planet-p-min 271.60000 --planet-p-max 277.60000
+python do_star.py 3749833 --planet-p-min 1031.80000 --planet-p-max 1071.00000
+python do_star.py 3757814 --planet-p-min 1321.00000 --planet-p-max 2761.00000
+python do_star.py 3760002 --planet-p-min 453.70000 --planet-p-max 462.50000
+python do_star.py 3762741 --planet-p-min 1008.00000 --planet-p-max 1432.00000
+python do_star.py 3763579 --planet-p-min 859.00000 --planet-p-max 2619.00000
+python do_star.py 3833853 --planet-p-min 440.80000 --planet-p-max 452.80000
+python do_star.py 3849354 --planet-p-min 109.17900 --planet-p-max 109.94700
+python do_star.py 3851151 --planet-p-min 253.00000 --planet-p-max 4093.00000
+python do_star.py 3969800 --planet-p-min 676.00000 --planet-p-max 780.00000
+python do_star.py 3975085 --planet-p-min 908.50000 --planet-p-max 934.10000
+python do_star.py 4077275 --planet-p-min 423.10000 --planet-p-max 499.10000
+python do_star.py 4078743 --planet-p-min 1367.00000 --planet-p-max 1775.00000
+python do_star.py 4141155 --planet-p-min 260.08000 --planet-p-max 262.24000
+python do_star.py 4168574 --planet-p-min 1321.00000 --planet-p-max 1745.00000
+python do_star.py 4170631 --planet-p-min 172.44000 --planet-p-max 178.12000
+python do_star.py 4171102 --planet-p-min 768.00000 --planet-p-max 976.00000
+python do_star.py 4180199 --planet-p-min 606.00000 --planet-p-max 4046.00000
+python do_star.py 4243461 --planet-p-min 474.20000 --planet-p-max 488.60000
+python do_star.py 4243984 --planet-p-min 549.40000 --planet-p-max 558.20000
+python do_star.py 4253860 --planet-p-min 154.58900 --planet-p-max 155.32500
+python do_star.py 4269337 --planet-p-min 671.20000 --planet-p-max 679.20000
+python do_star.py 4277242 --planet-p-min 330.50000 --planet-p-max 373.70000
+python do_star.py 4283747 --planet-p-min 1044.00000 --planet-p-max 1148.00000
+python do_star.py 4372410 --planet-p-min 989.00000 --planet-p-max 1197.00000
+python do_star.py 4380834 --planet-p-min 437.60000 --planet-p-max 448.00000
+python do_star.py 4381221 --planet-p-min 180.19000 --planet-p-max 181.23000
+python do_star.py 4386091 --planet-p-min 312.00000 --planet-p-max 600.00000
+python do_star.py 4456107 --planet-p-min 333.76000 --planet-p-max 337.68000
+python do_star.py 4476836 --planet-p-min 767.00000 --planet-p-max 786.20000
+python do_star.py 4574142 --planet-p-min 227.78000 --planet-p-max 232.98000
+python do_star.py 4575908 --planet-p-min 1559.00000 --planet-p-max 3319.00000
+python do_star.py 4587528 --planet-p-min 707.20000 --planet-p-max 772.00000
+python do_star.py 4647763 --planet-p-min 1624.00000 --planet-p-max 2584.00000
+python do_star.py 4862968 --planet-p-min 38.30000 --planet-p-max 39.04400
+python do_star.py 4902475 --planet-p-min 969.80000 --planet-p-max 985.80000
+python do_star.py 4937435 --planet-p-min 1377.60000 --planet-p-max 1449.60000
+python do_star.py 4950985 --planet-p-min 772.00000 --planet-p-max 876.00000
+python do_star.py 5022451 --planet-p-min 227.70000 --planet-p-max 233.78000
+python do_star.py 5176531 --planet-p-min 832.90000 --planet-p-max 861.70000
+python do_star.py 5196851 --planet-p-min 1107.00000 --planet-p-max 1195.00000
+python do_star.py 5212962 --planet-p-min 513.92000 --planet-p-max 520.72000
+python do_star.py 5219533 --planet-p-min 1519.00000 --planet-p-max 1623.00000
+python do_star.py 5253740 --planet-p-min 668.80000 --planet-p-max 699.20000
+python do_star.py 5271224 --planet-p-min 40.33100 --planet-p-max 40.70700
+python do_star.py 5272673 --planet-p-min 1179.00000 --planet-p-max 1259.00000
+python do_star.py 5295234 --planet-p-min 577.00000 --planet-p-max 2737.00000
+python do_star.py 5302006 --planet-p-min 716.40000 --planet-p-max 751.60000
+python do_star.py 5304634 --planet-p-min 1861.00000 --planet-p-max 2341.00000
+python do_star.py 5355850 --planet-p-min 1105.50000 --planet-p-max 1128.70000
+python do_star.py 5358323 --planet-p-min 309.10000 --planet-p-max 313.26000
+python do_star.py 5370646 --planet-p-min 370.73000 --planet-p-max 377.69000
+python do_star.py 5376614 --planet-p-min 709.00000 --planet-p-max 3429.00000
+python do_star.py 5385469 --planet-p-min 1976.00000 --planet-p-max 3016.00000
+python do_star.py 5394574 --planet-p-min 335.35000 --planet-p-max 338.23000
+python do_star.py 5459805 --planet-p-min 1172.00000 --planet-p-max 1644.00000
+python do_star.py 5475668 --planet-p-min 137.82800 --planet-p-max 138.26800
+python do_star.py 5542211 --planet-p-min 711.10000 --planet-p-max 746.30000
+python do_star.py 5545566 --planet-p-min 174.45000 --planet-p-max 179.73000
+python do_star.py 5641605 --planet-p-min 1133.00000 --planet-p-max 1237.00000
+python do_star.py 5647514 --planet-p-min 1078.40000 --planet-p-max 1149.60000
+python do_star.py 5705575 --planet-p-min 534.10000 --planet-p-max 541.22000
+python do_star.py 5709664 --planet-p-min 94.85800 --planet-p-max 95.20200
+python do_star.py 5723310 --planet-p-min 1231.40000 --planet-p-max 1305.80000
+python do_star.py 5725312 --planet-p-min 686.80000 --planet-p-max 722.80000
+python do_star.py 5728217 --planet-p-min 222.93000 --planet-p-max 226.61000
+python do_star.py 5733154 --planet-p-min 62.03000 --planet-p-max 63.07000
+python do_star.py 5734003 --planet-p-min 840.00000 --planet-p-max 1616.00000
+python do_star.py 5737687 --planet-p-min 996.00000 --planet-p-max 1140.00000
+python do_star.py 5738127 --planet-p-min 432.20000 --planet-p-max 453.00000
+python do_star.py 5768203 --planet-p-min 183.30000 --planet-p-max 184.18000
+python do_star.py 5791786 --planet-p-min 118.50000 --planet-p-max 120.10000
+python do_star.py 5808231 --planet-p-min 1037.00000 --planet-p-max 1125.00000
+python do_star.py 5811454 --planet-p-min 1078.00000 --planet-p-max 1342.00000
+python do_star.py 5819178 --planet-p-min 235.55000 --planet-p-max 239.71000
+python do_star.py 5857714 --planet-p-min 78.55000 --planet-p-max 79.91000
+python do_star.py 5857714 --planet-p-min 981.00000 --planet-p-max 1036.20000
+python do_star.py 5879187 --planet-p-min 1545.00000 --planet-p-max 4025.00000
+python do_star.py 5880352 --planet-p-min 175.81000 --planet-p-max 178.13000
+python do_star.py 5891975 --planet-p-min 833.00000 --planet-p-max 969.00000
+python do_star.py 5892660 --planet-p-min 1345.00000 --planet-p-max 1785.00000
+python do_star.py 5900260 --planet-p-min 159.12000 --planet-p-max 160.48000
+python do_star.py 5964173 --planet-p-min 1126.00000 --planet-p-max 1342.00000
+python do_star.py 5988140 --planet-p-min 3017.00000 --planet-p-max 5577.00000
+python do_star.py 6041680 --planet-p-min 667.20000 --planet-p-max 680.00000
+python do_star.py 6115466 --planet-p-min 718.42000 --planet-p-max 723.46000
+python do_star.py 6139591 --planet-p-min 1178.00000 --planet-p-max 1442.00000
+python do_star.py 6141372 --planet-p-min 462.00000 --planet-p-max 4782.00000
+python do_star.py 6206125 --planet-p-min 171.77000 --planet-p-max 173.93000
+python do_star.py 6222529 --planet-p-min 171.15000 --planet-p-max 174.27000
+python do_star.py 6229130 --planet-p-min 597.50000 --planet-p-max 627.10000
+python do_star.py 6229502 --planet-p-min 1273.00000 --planet-p-max 1369.00000
+python do_star.py 6230921 --planet-p-min 1012.00000 --planet-p-max 5412.00000
+python do_star.py 6231538 --planet-p-min 355.00000 --planet-p-max 7395.00000
+python do_star.py 6233899 --planet-p-min 761.00000 --planet-p-max 2761.00000
+python do_star.py 6280952 --planet-p-min 1035.30000 --planet-p-max 1055.30000
+python do_star.py 6287172 --planet-p-min 1836.00000 --planet-p-max 2252.00000
+python do_star.py 6290411 --planet-p-min 992.70000 --planet-p-max 1037.50000
+python do_star.py 6302589 --planet-p-min 1024.60000 --planet-p-max 1039.80000
+python do_star.py 6314475 --planet-p-min 403.40000 --planet-p-max 413.00000
+python do_star.py 6367159 --planet-p-min 277.80000 --planet-p-max 285.80000
+python do_star.py 6451876 --planet-p-min 915.60000 --planet-p-max 959.60000
+python do_star.py 6467639 --planet-p-min 21.30500 --planet-p-max 21.40900
+python do_star.py 6470973 --planet-p-min 1364.00000 --planet-p-max 2244.00000
+python do_star.py 6522144 --planet-p-min 986.90000 --planet-p-max 1046.90000
+python do_star.py 6586020 --planet-p-min 179.00000 --planet-p-max 443.00000
+python do_star.py 6586333 --planet-p-min 395.70000 --planet-p-max 424.50000
+python do_star.py 6604303 --planet-p-min 1164.00000 --planet-p-max 3564.00000
+python do_star.py 6629106 --planet-p-min 399.15000 --planet-p-max 405.47000
+python do_star.py 6633452 --planet-p-min 1124.00000 --planet-p-max 1332.00000
+python do_star.py 6668729 --planet-p-min 1136.80000 --planet-p-max 1191.20000
+python do_star.py 6671321 --planet-p-min 670.30000 --planet-p-max 678.30000
+python do_star.py 6678614 --planet-p-min 832.00000 --planet-p-max 976.00000
+python do_star.py 6756386 --planet-p-min 130.57000 --planet-p-max 138.25000
+python do_star.py 6762992 --planet-p-min 684.20000 --planet-p-max 701.00000
+python do_star.py 6854623 --planet-p-min 979.00000 --planet-p-max 1155.00000
+python do_star.py 6861400 --planet-p-min 2066.00000 --planet-p-max 2698.00000
+python do_star.py 6862920 --planet-p-min 61.30200 --planet-p-max 61.68600
+python do_star.py 6865077 --planet-p-min 446.18000 --planet-p-max 447.78000
+python do_star.py 6877609 --planet-p-min 52.59000 --planet-p-max 52.71800
+python do_star.py 6922995 --planet-p-min 1187.00000 --planet-p-max 2067.00000
+python do_star.py 6935101 --planet-p-min 928.10000 --planet-p-max 1000.90000
+python do_star.py 6939291 --planet-p-min 954.45000 --planet-p-max 959.41000
+python do_star.py 7051690 --planet-p-min 1085.40000 --planet-p-max 1123.00000
+python do_star.py 7060333 --planet-p-min 998.40000 --planet-p-max 1027.20000
+python do_star.py 7124680 --planet-p-min 107.71000 --planet-p-max 108.83000
+python do_star.py 7173839 --planet-p-min 351.70000 --planet-p-max 363.70000
+python do_star.py 7219502 --planet-p-min 831.40000 --planet-p-max 905.00000
+python do_star.py 7271892 --planet-p-min 191.95000 --planet-p-max 197.87000
+python do_star.py 7289158 --planet-p-min 545.70000 --planet-p-max 578.50000
+python do_star.py 7368960 --planet-p-min 1010.00000 --planet-p-max 1050.80000
+python do_star.py 7456441 --planet-p-min 97.42000 --planet-p-max 98.14000
+python do_star.py 7467518 --planet-p-min 611.30000 --planet-p-max 620.10000
+python do_star.py 7467539 --planet-p-min 1297.00000 --planet-p-max 1497.00000
+python do_star.py 7502559 --planet-p-min 626.00000 --planet-p-max 664.40000
+python do_star.py 7549852 --planet-p-min 70.45500 --planet-p-max 71.07900
+python do_star.py 7551993 --planet-p-min 337.38000 --planet-p-max 339.54000
+python do_star.py 7583208 --planet-p-min 232.19000 --planet-p-max 239.47000
+python do_star.py 7618364 --planet-p-min 2497.00000 --planet-p-max 4337.00000
+python do_star.py 7668791 --planet-p-min 2019.00000 --planet-p-max 3779.00000
+python do_star.py 7703305 --planet-p-min 174.51000 --planet-p-max 180.19000
+python do_star.py 7773133 --planet-p-min 560.40000 --planet-p-max 571.60000
+python do_star.py 7819024 --planet-p-min 212.59000 --planet-p-max 219.23000
+python do_star.py 7841434 --planet-p-min 81.69800 --planet-p-max 82.46600
+python do_star.py 7848288 --planet-p-min 596.34000 --planet-p-max 602.58000
+python do_star.py 7917485 --planet-p-min 760.00000 --planet-p-max 920.00000
+python do_star.py 7956461 --planet-p-min 77.81000 --planet-p-max 78.77000
+python do_star.py 7975162 --planet-p-min 740.90000 --planet-p-max 807.30000
+python do_star.py 7977996 --planet-p-min 1298.00000 --planet-p-max 1714.00000
+python do_star.py 8004558 --planet-p-min 258.52000 --planet-p-max 260.20000
+python do_star.py 8018827 --planet-p-min 209.39000 --planet-p-max 211.31000
+python do_star.py 8022144 --planet-p-min 1414.00000 --planet-p-max 1542.00000
+python do_star.py 8029546 --planet-p-min 499.80000 --planet-p-max 514.20000
+python do_star.py 8043436 --planet-p-min 11.00000 --planet-p-max 3051.00000
+python do_star.py 8045121 --planet-p-min 916.70000 --planet-p-max 936.70000
+python do_star.py 8086490 --planet-p-min 1103.00000 --planet-p-max 1983.00000
+python do_star.py 8098120 --planet-p-min 766.60000 --planet-p-max 802.60000
+python do_star.py 8106371 --planet-p-min 1048.00000 --planet-p-max 1116.80000
+python do_star.py 8120184 --planet-p-min 546.60000 --planet-p-max 557.80000
+python do_star.py 8121586 --planet-p-min 1088.90000 --planet-p-max 1160.90000
+python do_star.py 8122232 --planet-p-min 1198.00000 --planet-p-max 1526.00000
+python do_star.py 8196840 --planet-p-min 1666.00000 --planet-p-max 2026.00000
+python do_star.py 8197355 --planet-p-min 844.10000 --planet-p-max 857.70000
+python do_star.py 8197653 --planet-p-min 413.70000 --planet-p-max 428.10000
+python do_star.py 8235853 --planet-p-min 546.40000 --planet-p-max 561.60000
+python do_star.py 8256621 --planet-p-min 1039.30000 --planet-p-max 1072.10000
+python do_star.py 8264492 --planet-p-min 251.41000 --planet-p-max 252.77000
+python do_star.py 8264588 --planet-p-min 183.26000 --planet-p-max 186.38000
+python do_star.py 8264588 --planet-p-min 964.00000 --planet-p-max 1060.00000
+python do_star.py 8292150 --planet-p-min 582.80000 --planet-p-max 591.60000
+python do_star.py 8299332 --planet-p-min 777.30000 --planet-p-max 810.90000
+python do_star.py 8308688 --planet-p-min 887.10000 --planet-p-max 910.30000
+python do_star.py 8311110 --planet-p-min 155.79000 --planet-p-max 156.83000
+python do_star.py 8314525 --planet-p-min 2157.00000 --planet-p-max 3037.00000
+python do_star.py 8329014 --planet-p-min 354.62000 --planet-p-max 359.10000
+python do_star.py 8329629 --planet-p-min 1077.90000 --planet-p-max 1114.70000
+python do_star.py 8330102 --planet-p-min 3465.00000 --planet-p-max 3905.00000
+python do_star.py 8346686 --planet-p-min 779.50000 --planet-p-max 792.30000
+python do_star.py 8352420 --planet-p-min 1378.00000 --planet-p-max 1474.00000
+python do_star.py 8396062 --planet-p-min 162.18000 --planet-p-max 165.94000
+python do_star.py 8459354 --planet-p-min 53.47100 --planet-p-max 53.64700
+python do_star.py 8460126 --planet-p-min 288.20000 --planet-p-max 298.60000
+python do_star.py 8491816 --planet-p-min 1409.00000 --planet-p-max 1601.00000
+python do_star.py 8500899 --planet-p-min 1054.40000 --planet-p-max 1104.00000
+python do_star.py 8516686 --planet-p-min 171.10000 --planet-p-max 172.30000
+python do_star.py 8552907 --planet-p-min 480.40000 --planet-p-max 493.20000
+python do_star.py 8560996 --planet-p-min 1263.00000 --planet-p-max 2223.00000
+python do_star.py 8563964 --planet-p-min 1149.50000 --planet-p-max 1227.10000
+python do_star.py 8565229 --planet-p-min 32.54200 --planet-p-max 32.71800
+python do_star.py 8583770 --planet-p-min 1443.00000 --planet-p-max 1819.00000
+python do_star.py 8630254 --planet-p-min 817.00000 --planet-p-max 921.00000
+python do_star.py 8653100 --planet-p-min 915.80000 --planet-p-max 956.60000
+python do_star.py 8682555 --planet-p-min 489.90000 --planet-p-max 504.30000
+python do_star.py 8752359 --planet-p-min 1131.00000 --planet-p-max 4571.00000
+python do_star.py 8771498 --planet-p-min 331.18000 --planet-p-max 338.94000
+python do_star.py 8772391 --planet-p-min 378.30000 --planet-p-max 395.10000
+python do_star.py 8826718 --planet-p-min 509.47000 --planet-p-max 514.75000
+python do_star.py 8914322 --planet-p-min 1432.00000 --planet-p-max 1928.00000
+python do_star.py 8933391 --planet-p-min 210.84000 --planet-p-max 214.76000
+python do_star.py 8940640 --planet-p-min 38.76700 --planet-p-max 39.28700
+python do_star.py 8956850 --planet-p-min 1289.10000 --planet-p-max 1357.10000
+python do_star.py 8964755 --planet-p-min 260.25000 --planet-p-max 263.93000
+python do_star.py 8975515 --planet-p-min 465.00000 --planet-p-max 3345.00000
+python do_star.py 9020199 --planet-p-min 31.20300 --planet-p-max 31.37100
+python do_star.py 9054553 --planet-p-min 280.70000 --planet-p-max 292.70000
+python do_star.py 9092897 --planet-p-min 1175.00000 --planet-p-max 1287.00000
+python do_star.py 9094694 --planet-p-min 1260.00000 --planet-p-max 1444.00000
+python do_star.py 9108615 --planet-p-min 2400.00000 --planet-p-max 2888.00000
+python do_star.py 9172627 --planet-p-min 739.00000 --planet-p-max 859.00000
+python do_star.py 9201644 --planet-p-min 47.18100 --planet-p-max 47.56500
+python do_star.py 9207344 --planet-p-min 733.50000 --planet-p-max 742.30000
+python do_star.py 9210037 --planet-p-min 438.10000 --planet-p-max 463.70000
+python do_star.py 9265050 --planet-p-min 1036.30000 --planet-p-max 1061.10000
+python do_star.py 9331207 --planet-p-min 126.34000 --planet-p-max 127.46000
+python do_star.py 9367382 --planet-p-min 154.46000 --planet-p-max 156.14000
+python do_star.py 9450392 --planet-p-min 1657.00000 --planet-p-max 3097.00000
+python do_star.py 9466030 --planet-p-min 1121.60000 --planet-p-max 1186.40000
+python do_star.py 9473000 --planet-p-min 766.48000 --planet-p-max 773.44000
+python do_star.py 9526946 --planet-p-min 930.30000 --planet-p-max 951.10000
+python do_star.py 9550886 --planet-p-min 1514.00000 --planet-p-max 1714.00000
+python do_star.py 9578461 --planet-p-min 703.80000 --planet-p-max 727.00000
+python do_star.py 9594022 --planet-p-min 411.30000 --planet-p-max 414.58000
+python do_star.py 9636283 --planet-p-min 895.80000 --planet-p-max 940.60000
+python do_star.py 9649801 --planet-p-min 1137.70000 --planet-p-max 1184.90000
+python do_star.py 9651065 --planet-p-min 271.20000 --planet-p-max 273.60000
+python do_star.py 9655422 --planet-p-min 186.23000 --planet-p-max 192.63000
+python do_star.py 9655501 --planet-p-min 792.70000 --planet-p-max 842.30000
+python do_star.py 9655514 --planet-p-min 321.22000 --planet-p-max 327.14000
+python do_star.py 9655909 --planet-p-min 1951.00000 --planet-p-max 3871.00000
+python do_star.py 9666465 --planet-p-min 1585.00000 --planet-p-max 2465.00000
+python do_star.py 9693282 --planet-p-min 767.00000 --planet-p-max 3007.00000
+python do_star.py 9699950 --planet-p-min 183.78000 --planet-p-max 186.58000
+python do_star.py 9722737 --planet-p-min 442.17000 --planet-p-max 446.01000
+python do_star.py 9774314 --planet-p-min 600.54000 --planet-p-max 608.22000
+python do_star.py 9791112 --planet-p-min 1228.00000 --planet-p-max 1836.00000
+python do_star.py 9812351 --planet-p-min 166.60000 --planet-p-max 169.00000
+python do_star.py 9813078 --planet-p-min 1156.00000 --planet-p-max 1476.00000
+python do_star.py 9823602 --planet-p-min 649.00000 --planet-p-max 687.40000
+python do_star.py 9823652 --planet-p-min 1262.30000 --planet-p-max 1341.50000
+python do_star.py 9837267 --planet-p-min 60.02000 --planet-p-max 63.14000
+python do_star.py 9837659 --planet-p-min 1203.00000 --planet-p-max 2483.00000
+python do_star.py 9844791 --planet-p-min 205.99000 --planet-p-max 210.95000
+python do_star.py 9850393 --planet-p-min 296.41000 --planet-p-max 301.45000
+python do_star.py 9874181 --planet-p-min 562.60000 --planet-p-max 575.40000
+python do_star.py 9895857 --planet-p-min 222.94000 --planet-p-max 225.18000
+python do_star.py 9897089 --planet-p-min 1184.00000 --planet-p-max 1984.00000
+python do_star.py 9936518 --planet-p-min 274.20000 --planet-p-max 285.40000
+python do_star.py 9953617 --planet-p-min 1075.00000 --planet-p-max 1179.00000
+python do_star.py 9963609 --planet-p-min 879.60000 --planet-p-max 918.00000
