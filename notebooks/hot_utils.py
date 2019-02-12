@@ -610,7 +610,7 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
     tic = clock()
 
     print('Loading light curve for KIC %d...' % kic)
-    lcs = lightkurve.download(lightkurve.search(kic,cadence='long'))
+    lcs = lightkurve.search(kic,cadence='long').download_all()
     lc = stitch_lc_list(lcs)
 
     print('Loaded!')
