@@ -21,4 +21,4 @@ while read -r line; do
     if [ $i -eq $SLURM_ARRAY_TASK_ID ]; then
 	eval "$line"
     fi
-done < t1.txt
+done < simon_commands.txt
