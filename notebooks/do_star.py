@@ -41,7 +41,9 @@ if __name__ == '__main__':
     ap.add_argument('--plot-format', type=str, default='png', choices=['pdf', 'png'], help='File format for plots')
     ap.add_argument('--planet-p-min', type=str, default=None)
     ap.add_argument('--planet-p-max', type=str, default=None)
+    ap.add_argument('--outdir', type=str, default='plots/')
+
 
     args = ap.parse_args()
 
-    do_all(args.kic,planet_p_range=(args.planet_p_min,args.planet_p_max),renormalize=True)
+    do_all(args.kic,planet_p_range=(args.planet_p_min,args.planet_p_max),renormalize=True,outdir=outdir)
