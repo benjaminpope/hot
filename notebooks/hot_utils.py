@@ -14,6 +14,7 @@ from matplotlib import rc
 from time import time as clock
 
 from lightkurve import KeplerLightCurveFile, KeplerLightCurve
+import lightkurve
 from numpy.core.records import array as rarr
 
 # planet search stuff
@@ -89,7 +90,6 @@ def get_mod_out(channel):
     index = np.where(tab['Channel']==channel)
     mod, out = tab['Mod'][index], tab['Out'][index]
     return int(mod), int(out)
-
 
 
 def stitch_lc_list(lcs,flux_type='PDCSAP_FLUX'):
@@ -610,7 +610,7 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
     tic = clock()
 
     print('Loading light curve for KIC %d...' % kic)
-    lcs = KeplerLightCurveFile.from_archive(kic,cadence='long')
+    lcs = lightkurve.download(lightkurve.search(kic,cadence='long'))
     lc = stitch_lc_list(lcs)
 
     print('Loaded!')
