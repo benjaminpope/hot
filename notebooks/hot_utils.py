@@ -680,12 +680,12 @@ def test_psearch(kic,planet_p_range=(1.,40.)):
             lcs.append(lightkurve.open(fname))
         print('Already downloaded %s' % kic)
     except:
-        lcs = lightkurve.search_lightcurvefile(kic,cadence='long').download_all()
+        
         print('Downloaded %s' % kic)
     
     lc = stitch_lc_list(lcs)
-    lcs.trposi = np.zeros_like(lcs.flux)
-    lcs.trtime= np.ones_like(lcs.flux)
+    lc.trposi = np.zeros_like(lcs.flux)
+    lc.trtime= np.ones_like(lcs.flux)
 
     lc4.pp = pp 
     lc4.ff = ff
