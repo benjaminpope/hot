@@ -684,8 +684,8 @@ def test_psearch(kic,planet_p_range=(1.,40.)):
         print('Downloaded %s' % kic)
     
     lc = stitch_lc_list(lcs)
-    lc.trposi = np.zeros_like(lcs.flux)
-    lc.trtime= np.ones_like(lcs.flux)
+    lc.trposi = np.zeros_like(lc.flux)
+    lc.trtime= np.ones_like(lc.flux)
 
     lc4.pp = pp 
     lc4.ff = ff
