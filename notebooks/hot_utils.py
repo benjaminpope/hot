@@ -612,7 +612,7 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
 
     try:
         lcs = []
-        for fname in glob.glob('../data/lcs/*%s*.fits' % kic):
+        for fname in glob.glob('../data/lcs/*%s*llc.fits' % kic):
             lcs.append(lightkurve.open(fname))
         print('Already downloaded %s' % kic)
     except:
