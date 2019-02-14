@@ -614,7 +614,7 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
         lcs = []
         for fname in glob.glob('../data/lcs/*%s*.fits' % kic):
             lcs.append(lightkurve.open(fname))
-            print('Already downloaded %s' % kic)
+        print('Already downloaded %s' % kic)
     except:
         lcs = lightkurve.search_lightcurvefile(kic,cadence='long').download_all()
         print('Downloaded %s' % kic)
