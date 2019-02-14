@@ -687,10 +687,10 @@ def test_psearch(kic,planet_p_range=(1.,40.)):
     lc.trposi = np.zeros_like(lc.flux)
     lc.trtime= np.ones_like(lc.flux)
 
-    lc4.pp = [1]
-    lc4.ff = [1]
-    lc4.star_p_range = (1./24.,30.)
-    lc4.niter = 1
+    lc.pp = [1]
+    lc.ff = [1]
+    lc.star_p_range = (1./24.,30.)
+    lc.niter = 1
 
     ts = BasicSearch(lc,period_range=planet_p_range)
 
