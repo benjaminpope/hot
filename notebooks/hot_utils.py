@@ -667,6 +667,38 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
 
     print('Done\n')
 
+def test_psearch(kic,planet_p_range=(1.,40.)):
+    tic = clock()
+    print('Loading light curve for KIC %d...' % kic)
+
+    try:
+        fnames = glob.glob('../data/lcs/*%s*llc.fits' % kic)
+        assert fnames,'No files'
+        lcs = []
+
+        for fname in fnames:
+            lcs.append(lightkurve.open(fname))
+        print('Already downloaded %s' % kic)
+    except:
+        lcs = lightkurve.search_lightcurvefile(kic,cadence='long').download_all()
+        print('Downloaded %s' % kic)
+    
+    lc = stitch_lc_list(lcs)
+    lcs.trposi = np.zeros_like(lcs.flux)
+    lcs.trtime= np.ones_like(lcs.flux)
+
+    lc4.pp = pp 
+    lc4.ff = ff
+    lc4.star_p_range = star_p_range
+    lc4.niter = niter
+
+    ts = BasicSearch(lc,period_range=planet_p_range)
+
+        
+
+    print('Loaded!')
+    min_period, max_period = star_p_range
+
 
 # for scripting
 
