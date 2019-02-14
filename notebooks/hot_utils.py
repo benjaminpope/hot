@@ -147,7 +147,6 @@ def correct_all(lc):
     lc2 = copy.copy(lc)
     lc2.trposi = np.zeros_like(lc2.flux)
     for qq in np.unique(lc2.quarter.astype('int')):
-
         m = lc2.quarter==qq
         corrflux = correct_quarter(lc2,qq)
         lc2.trposi[m] = lc.flux[m] - corrflux + np.nanmedian(corrflux)
@@ -613,8 +612,11 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
     print('Loading light curve for KIC %d...' % kic)
 
     try:
+        fnames = glob.glob('../data/lcs/*%s*llc.fits' % kic)
+        assert fnames,'No files'
         lcs = []
-        for fname in glob.glob('../data/lcs/*%s*llc.fits' % kic):
+
+        for fname in fnames:
             lcs.append(lightkurve.open(fname))
         print('Already downloaded %s' % kic)
     except:
@@ -644,12 +646,13 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
 
     print('Correcting with CBVs...')
     lc4 = correct_all(lc3)
+    print('Corrected with CBVs!')
+
     lc4.pp = pp 
     lc4.ff = ff
     lc4.star_p_range = star_p_range
     lc4.niter = niter
 
-    print('Corrected with CBVs!')
 
     print('Doing Transit Search...')
     ts = BasicSearch(lc4,period_range=planet_p_range)
