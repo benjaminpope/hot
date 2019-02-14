@@ -694,7 +694,18 @@ def test_psearch(kic,planet_p_range=(1.,40.)):
 
     ts = BasicSearch(lc,period_range=planet_p_range)
     print('Fully initialized')
-    ts()
+    ts.run_bls()
+    print('BLS run')
+    ts.fit_transit()
+    print('transit fit')
+    ts.fit_variability()
+    print('variability fit')
+    ts.fit_even_odd()
+    print('odd/even')
+    ts.per_orbit_likelihoods()
+    print('likelihoods')
+    ts.test_eclipse()
+    print('eclipse')
 
 # for scripting
 
