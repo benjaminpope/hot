@@ -39,8 +39,8 @@ if __name__ == '__main__':
     ap.add_argument('--plot-dir', default='.', type=str)
     ap.add_argument('--do-plots', action='store_true', default=True)
     ap.add_argument('--plot-format', type=str, default='png', choices=['pdf', 'png'], help='File format for plots')
-    ap.add_argument('--planet-p-min', type=str, default=None)
-    ap.add_argument('--planet-p-max', type=str, default=None)
+    ap.add_argument('--planet-p-min', type=float, default=None)
+    ap.add_argument('--planet-p-max', type=float, default=None)
     ap.add_argument('--outdir', type=str, default='plots/')
 
 
