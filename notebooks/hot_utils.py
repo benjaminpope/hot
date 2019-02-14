@@ -693,7 +693,7 @@ def test_psearch(kic,planet_p_range=(1.,40.)):
     lc.niter = 1
 
     ts = BasicSearch(lc,period_range=planet_p_range)
-
+    print('Fully initialized')
     ts()
 
 # for scripting
