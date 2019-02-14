@@ -423,6 +423,8 @@ class BasicSearch(TransitSearch):
         self.period = None
         self.zero_epoch = None
         self.duration = None
+
+        print('Initialized search')
         
     def run_bls(self):
         b = self.bls
