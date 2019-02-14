@@ -691,6 +691,7 @@ def test_psearch(kic,planet_p_range=(1.,40.)):
     lc.ff = [1]
     lc.star_p_range = (1./24.,30.)
     lc.niter = 1
+    lc = lc[np.isfinite(lc.flux) * lc.quality==0]
 
     ts = BasicSearch(lc,period_range=planet_p_range)
     print('Fully initialized')
