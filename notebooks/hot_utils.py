@@ -21,8 +21,7 @@ from numpy.core.records import array as rarr
 from pybls import BLS
 from k2ps.psearch import TransitSearch
 from scipy.ndimage import binary_dilation
-from pytransit import MandelAgol as MA
-from pytransit import Gimenez as GM
+from pytransit import QuadraticModel as MA
 from acor import acor
 
 from exotk.utils.misc import fold
@@ -37,6 +36,13 @@ import matplotlib
 from matplotlib.gridspec import GridSpec
 from matplotlib.pyplot import figure, subplots, subplot
 colours = matplotlib.rcParams['axes.prop_cycle'].by_key()['color']
+
+from IPython import get_ipython
+
+if 'IPKernelApp' in get_ipython().config:
+    from tqdm import tqdm_notebook as tqdm
+else:
+    from tqdm import tqdm
 
 
 def find_cbv(quarter):
@@ -225,18 +231,26 @@ def auto_sine_fit(lc,prob_max=1e-10, maxiter=60,min_period=4./24., max_period=30
     
     i = 0
     falarm = 0.0
+    tq = tqdm(total=maxiter)
+
+    components = []
     while falarm <= prob_max:
         best_freq, maxpower, falarm = get_best_freq(lc2,min_period=min_period,max_period=max_period)
         ff.append(best_freq)
         pp.append(maxpower)
         snr.append(falarm)
-        y_fit += LombScargle(lc2.time, lc2.flux-1, lc2.flux_err).model(lc2.time, best_freq)
+        new_fit = LombScargle(lc2.time, lc2.flux-1, lc2.flux_err).model(lc2.time, best_freq)
+        components.append(new_fit)
+        y_fit += new_fit
         lc2.flux = lc.flux - y_fit 
         noise.append(lc2.estimate_cdpp())
         
         i += 1 
+        tq.update(1)
         if i > maxiter:
             break
+    tq.close()
+
 
     lc2.trtime = y_fit + np.nanmedian(lc.flux)
     lc2.flux = lc.flux
@@ -245,7 +259,7 @@ def auto_sine_fit(lc,prob_max=1e-10, maxiter=60,min_period=4./24., max_period=30
     except:
         lc2.corr_flux = lc2.flux - lc2.trtime + np.nanmedian(lc2.trtime)
         
-    return lc2, np.array(ff), np.array(pp), np.array(noise), np.array(snr), i
+    return lc2, np.array(ff), np.array(pp), np.array(noise), np.array(snr), i, components 
 
 def renorm_sde(bls,niter=3,order=2,nsig=2.5):
     '''
@@ -638,7 +652,7 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
 
     print('Running CLEAN')
     if auto == True:
-        lc3, ff, pp, noise, snrs, niter = auto_sine_fit(lc2,prob_max = 1e-20, maxiter=200,min_period=min_period,max_period=max_period) 
+        lc3, ff, pp, noise, snrs, niter, components = auto_sine_fit(lc2,prob_max = 1e-20, maxiter=200,min_period=min_period,max_period=max_period) 
         print('Subtracted %d sine waves' % niter)   
     else:
         lc3, ff, pp, noise = iterative_sine_fit(lc2, niter,min_period=min_period, max_period=max_period)    
