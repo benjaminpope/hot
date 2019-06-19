@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+### this is all hacked from https://github.com/dfm/ketu
+
 from __future__ import division, print_function, unicode_literals
 
 __all__ = ["Data"]
