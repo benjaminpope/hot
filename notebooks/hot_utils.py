@@ -460,7 +460,7 @@ def test_psearch(kic,planet_p_range=(1.,40.)):
             lcs.append(lightkurve.open(fname))
         print('Already downloaded %s' % kic)
     except:
-        lcs = lightkurve.search_lightcurvefile(kic,cadence='long').download_all()
+        lcs = lightkurve.search_lightcurvefile(kic,cadence='long').download_all(download_dir='../data/lcs/')
         print('Downloaded %s' % kic)
     
     lc = stitch_lc_list(lcs)
