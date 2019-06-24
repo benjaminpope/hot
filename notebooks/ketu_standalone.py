@@ -17,19 +17,22 @@ from tqdm import tqdm
 
 from lightkurve import KeplerLightCurve
 from _compute import compute_hypotheses
+from _grid_search import  grid_search
 
 # from ..gp_heuristics import estimate_tau, kernel, optimize_gp_params
 
 
 class ketuLightCurve(KeplerLightCurve):
 
-    def prepare(self, basis, nbasis=150, sigma_clip=7.0, max_iter=10,
+    def prepare(self, basis, sigma_clip=7.0, max_iter=10,
                 tau_frac=0.25, lam=1.0):
         self.lam = lam
 
         # Normalize the data.
         self.flux = self.flux / np.median(self.flux) - 1.0
         self.flux *= 1e3  # Convert to ppt.
+
+        self.time -= np.nanmin(self.time)
 
         # Estimate the uncertainties.
         self.ivar = 1.0 / np.median(np.diff(self.flux) ** 2)
@@ -177,13 +180,15 @@ class ketuLightCurve(KeplerLightCurve):
         return np.dot(self.K_b, cho_solve(self.factor, y))
 
 
-    def search_one_d(self,min_period=1.0,max_period=40.,dt=0.01,durations=[0.05],alpha=500*np.log(100),min_transits=3,time_spacing=(0.05)):
+    def search_one_d(self,durations=[0.05],alpha=500*np.log(100),time_spacing=(0.05)):
         
         tmin, tmax = np.nanmin(self.time), np.nanmax(self.time)
         try:
             dt = time_spacing
         except:
             dt = 0.5*np.nanmedian(np.abs(self.time-np.roll(self.time,1)))
+
+        self.durations = durations
 
         time_grid = np.arange(tmin, tmax, dt)
 
@@ -208,9 +213,22 @@ class ketuLightCurve(KeplerLightCurve):
 
         print('1D Search Complete')
 
-    def search_2d(self,min_transits=3):
+    def search_2d(self,min_period=1.0,max_period=40.,min_transits=3):
         dt = 0.5*np.min(self.durations)
-        results = grid_search(min_transits, self.alpha,
+        self.min_period = min_period
+        self.max_period = max_period
+        self.min_transits = min_transits
+
+        ttot = np.nanmax(self.time) - np.nanmin(self.time)
+        delta_log_period = 0.2*np.min(self.durations)/ttot
+        lpmin, lpmax = np.log(self.min_period), np.log(self.max_period)
+        self.periods = np.exp(np.arange(lpmin, lpmax, delta_log_period))
+
+        n = len(self.time)
+        k = len(self.basis) + 1
+        alpha= k * np.log(n) - np.log(2 * np.pi)
+
+        results = grid_search(self.min_transits, alpha,
                       self.tmin, self.tmax, self.time_spacing, self.depth_1d,
                       self.depth_ivar_1d, self.dll_1d, self.periods, dt)
         self.t0_2d, self.phic_same, self.phic_same_2, self.phic_variable, self.depth_2d, self.depth_ivar_2d \
