@@ -835,6 +835,65 @@ class BasicSearch(object):
          xlabel='Phase', ylabel='Normalised flux')
         setp(ax.get_yticklabels(), visible=False)
     
+    def plot_folded(self, ax=None, nbin=40):
+        period, zero_epoch = self.p, self.t0
+        depth = 1-np.min(self.best_lc)
+
+
+        duration = 0.5
+
+        flux_m = self.best_lc
+        phase = (fold(self.time, period, zero_epoch, 0.5, normalize=False) -period)
+
+        sids = np.argsort(phase)
+        flux_m = flux_m[sids]
+        phase = phase[sids]
+        folded = self.d.fold(period,t0=zero_epoch)
+
+        binned = folded.bin(15)
+        bpd,bfd = binned.time, binned.flux
+        ax.plot(bpd, bfd, marker='o', ms=2,color=colours[1])
+        ax.plot(folded.time, flux_m, 'k')
+
+        ax.axhline(flux_m.min(), alpha=0.25, ls='--')
+
+        ax.get_yaxis().get_major_formatter().set_useOffset(False)
+        ax.axvline(0, alpha=0.25, ls='--', lw=1)
+    #     [ax.axvline(hd, alpha=0.25, ls='-', lw=1) for hd in hdur]
+        ax.set_ylim(1-1.25*depth,1+0.25*depth)
+        ax.set_xlim(folded.time.min(),folded.time.max())
+
+        setp(ax,xlabel='Phase', ylabel='Normalised flux')
+        setp(ax.get_yticklabels(), visible=False)
+
+    def plot_eclipse(self, ax=None, nbin=40):
+        period, zero_epoch = self.p, self.t0
+
+        duration = 0.5
+
+        flux_m = self.best_lc
+        phase = (fold(self.time, period, zero_epoch+period/2., 0.5, normalize=False) - period)
+
+        sids = np.argsort(phase)
+        flux_m = flux_m[sids]
+        phase = phase[sids]
+        folded = self.d.fold(period,t0=zero_epoch+period/2.)
+
+        binned = folded.bin(15)
+        bpd,bfd = binned.time, binned.flux
+        ax.plot(bpd, bfd, marker='o', ms=2,color=colours[1])
+        ax.plot(folded.time, flux_m, 'k')
+
+        ax.axhline(flux_m.min(), alpha=0.25, ls='--')
+
+        ax.get_yaxis().get_major_formatter().set_useOffset(False)
+        ax.axvline(0, alpha=0.25, ls='--', lw=1)
+    #     [ax.axvline(hd, alpha=0.25, ls='-', lw=1) for hd in hdur]
+        fluxrange =bpd.max()-bpd.min()
+        setp(ax, xlim=(-0.2,0.2), xlabel='Phase', ylabel='Normalised flux')
+        setp(ax.get_yticklabels(), visible=False)
+
+
     def plot_transits(self, ax=None):
         period, t0 = self.p, self.t0
         offset = 1.5*self.depth
@@ -911,27 +970,27 @@ def plot_all(ts,save_file=None):
     ax_lctime = subplot(gs1[1,:],sharex=ax_lcpos)
     ax_lcwhite = subplot(gs1[2,:],sharex=ax_lcpos)
     ax_lcfold = subplot(gs[2,1:])
-    ax_lnlike = subplot(gs[1,2])
+    # ax_lnlike = subplot(gs[1,2])
     ax_lcoe   = subplot(gs[0,1]),subplot(gs[0,2])
     ax_sde    = subplot(gs[3,1:])
     ax_transits = subplot(gs[1:,0])
     ax_info = subplot(gs[0,0])
-    ax_ec = subplot(gs[1,1])
-    axes = [ax_lctime,ax_lcpos,ax_lcwhite, ax_lcfold, ax_lnlike, ax_lcoe[0], ax_lcoe[1], ax_sde, ax_transits, ax_info, ax_ec]
+    ax_ec = subplot(gs[1,1:])
+    # axes = [ax_lctime,ax_lcpos,ax_lcwhite, ax_lcfold, ax_lcoe[0], ax_lcoe[1], ax_sde, ax_transits, ax_info, ax_ec]
 
     ts.plot_lc_pos(ax_lcpos)
     ts.plot_lc_time(ax_lctime)
     ts.plot_lc_white(ax_lcwhite)
-    # ts.plot_eclipse(ax_ec) 
+    ts.plot_folded(ax_ec) 
     ts.plot_pgram(ax_lcfold) # replace with periodogram - to do! 
     ts.plot_fit_and_eo(ax_lcoe)
     ts.plot_info(ax_info)
     # ts.plot_lnlike(ax_lnlike)
     ts.plot_sde(ax_sde)
     ts.plot_transits(ax_transits)
-    ax_lnlike.set_title('Ln likelihood per orbit')
+    # ax_lnlike.set_title('Ln likelihood per orbit')
     ax_transits.set_title('Individual transits')
-    ax_ec.set_title('Secondary eclipse')
+    ax_ec.set_title('Folded Light Curve')
     ax_lcoe[0].set_title('Folded transit and model')
     ax_lcoe[1].set_title('Even and odd transits')
     ax_lcfold.set_title('Pulsation Periodogram')
