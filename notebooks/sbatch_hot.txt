@@ -1,2 +1,2 @@
-python -u hot_script.py -kic 8197761 &> kic_8197761_out.txt
-python -u hot_script.py -kic 1026294 &> kic_1026294_out.txt
+python -u hot_script.py -kic 8197761
+python -u hot_script.py -kic 1026294

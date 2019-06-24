@@ -20,7 +20,7 @@ mpl.rcParams["font.family"] = "Times New Roman"
 
 if __name__ == '__main__':
     ap = ArgumentParser(description='hot: look for planets around hot stars with iterative sine fitting')
-    ap.add_argument('-kic', default=8197761,type=int,help='Target KIC ID')
+    ap.add_argument('kic',type=int,help='Target KIC ID')
 
     args = ap.parse_args()
 
