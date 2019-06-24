@@ -1,0 +1,2 @@
+python hot_script.py -kic 8197761
+python hot_script.py -kic 1026294

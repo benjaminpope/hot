@@ -172,13 +172,22 @@ def correct_quarter(lc,quarter):
 
     return corrected_flux
 
-def correct_all(lc):
-    lc2 = copy.copy(lc)
-    lc2.trposi = np.zeros_like(lc2.flux)
-    for qq in np.unique(lc2.quarter.astype('int')):
-        m = lc2.quarter==qq
-        corrflux = correct_quarter(lc2,qq)
-        lc2.trposi[m] = lc.flux[m] - corrflux + np.nanmedian(corrflux)
+def correct_all(lc,ff):
+    niter = lc.niter
+
+    design = make_design_matrix(lc,ff)
+    weights, residuals, rank, s = np.linalg.lstsq(design.T,lc.flux)
+
+    model = np.dot(weights,design)
+    model_time = np.dot(weights[:niter],design[:niter,:])
+    model_pos = np.dot(weights[niter:],design[niter:,:])
+
+    model_time = model_time-np.nanmedian(model_time)+1
+    model_pos = model_pos-np.nanmedian(model_pos)+1
+
+    lc2 = lc.copy()
+    lc2.trposi = model_pos
+    lc2.trtime = model_time
     return lc2
 
 
@@ -281,6 +290,8 @@ def auto_sine_fit(lc,prob_max=1e-10, maxiter=60,min_period=4./24., max_period=30
         lc2.corr_flux = lc2.corr_flux - lc2.trtime + np.nanmedian(lc2.trtime)
     except:
         lc2.corr_flux = lc2.flux - lc2.trtime + np.nanmedian(lc2.trtime)
+
+    lc2.niter = i 
         
     return lc2, np.array(ff), np.array(pp), np.array(noise), np.array(snr), i, components 
 
@@ -412,7 +423,7 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
     print('Cleaned!')
 
     print('Correcting with CBVs...')
-    lc4 = correct_all(lc3)
+    lc4 = correct_all(lc3,ff)
     print('Corrected with CBVs!')
 
     lc4.pp = pp 
@@ -420,11 +431,13 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
     lc4.star_p_range = star_p_range
     lc4.niter = niter
 
-
     print('Doing Transit Search...')
     ts = BasicSearch(lc4,period_range=planet_p_range)
 
-    ts()
+    ts.run_bls()    
+
+    fit = ts.fit_transit()
+    
     print('Transit search done!')
     toc = clock()
 
