@@ -1,6 +1,7 @@
 from hot_utils import *
 
 from argparse import ArgumentParser
+import matplotlib as mpl
 
 mpl.style.use('seaborn-colorblind')
 
