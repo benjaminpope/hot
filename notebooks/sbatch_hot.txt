@@ -1,2 +1,3 @@
-python -u hot_script.py 8197761
-python -u hot_script.py 1026294
+python -u hot_script.py 1026294 
+python -u hot_script.py 8197761 
+python -u hot_script.py 1162150 
