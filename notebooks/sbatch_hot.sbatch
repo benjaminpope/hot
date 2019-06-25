@@ -11,8 +11,7 @@ if [ "$SLURM_JOBTMP" != "" ]; then
     THEANO_FLAGS="base_compiledir=$SLURM_JOBTMP,$THEANO_FLAGS"
 fi
 
-export THEANO_FLAGS="mode=FAST_RUN,device=gpu,floatX=float32,lib.cnmem=1,$THEANO
-_FLAGS"
+export THEANO_FLAGS="$THEANO_FLAGS"
 
 
 if [ "$SLURM_ARRAY_TASK_ID" == "" ]; then exit; fi
