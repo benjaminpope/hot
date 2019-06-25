@@ -451,6 +451,9 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
 
     plot_all(ts,save_file='%splots_%d.%s' % (outdir,kic,figtype))
 
+    f = open('%sdata_%d.txt' % (outdir,kic),'w')
+    f.write('%d %f %f %f %f %f %d' % (kic, ts.p, ts.t0, ts.bsde, ts.impact, ts.depth, ts.niter))
+    f.close()
     print('Done\n')
 
 def test_psearch(kic,planet_p_range=(1.,40.)):
@@ -753,10 +756,11 @@ class BasicSearch(object):
         self.best_lc = map_soln['light_curves'].T[0]+1
         self.impact = map_soln['b']
         self.ror = map_soln['ror']
+        self.depth = 1-ts.best_lc.min()
         return model, map_soln
 
     def plot_info(self, ax):
-        t0,p,tdep,rrat = self.t0,self.p, self.ror**2, 0
+        t0,p,tdep,rrat = self.t0,self.p, self.depth, 0
         # a = res.trf_semi_major_axis[0]
         ax.text(0.0,1.0, 'KIC {:d}'.format(self.epic), size=12, weight='bold', va='top', transform=ax.transAxes)
         ax.text(0.0,0.83, ('SDE\n'
