@@ -5,7 +5,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=8GB
 #SBATCH --time=08:00:00
-#SBATCH --array=0-25
+#SBATCH --array=0-52
 
 if [ "$SLURM_JOBTMP" != "" ]; then
     THEANO_FLAGS="base_compiledir=$SLURM_JOBTMP,$THEANO_FLAGS"
