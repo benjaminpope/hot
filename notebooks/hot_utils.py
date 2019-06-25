@@ -134,6 +134,12 @@ def stitch_lc_list(lcs,flux_type='PDCSAP_FLUX'):
     lc = copy.copy(lcs[0])
     for lci in lcs[1:]:
         lc = lc.append(copy.copy(lci))
+
+    args = np.argsort(lc.time)
+    lc = lc[args]
+    
+    quarters = quarters[args]
+    channels = channels[args]
         
     lc.quarter = quarters.astype('int')
     lc.channel = channels.astype('int')
@@ -437,7 +443,7 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
     ts.run_bls()    
 
     fit = ts.fit_transit()
-    
+
     print('Transit search done!')
     toc = clock()
 
