@@ -137,7 +137,7 @@ def stitch_lc_list(lcs,flux_type='PDCSAP_FLUX'):
 
     args = np.argsort(lc.time)
     lc = lc[args]
-    
+
     quarters = quarters[args]
     channels = channels[args]
         
@@ -928,7 +928,7 @@ class BasicSearch(object):
                 j += 1 
                 continue
             tt, ff = self.time[transit_mask], self.flux[transit_mask]+(j*offset)
-            tt -= np.median(tt)
+            tt -= (self.t0+(period*j))
             ax.plot(tt,ff,'-o')
             j += 1
             k += 1
