@@ -756,7 +756,7 @@ class BasicSearch(object):
         self.best_lc = map_soln['light_curves'].T[0]+1
         self.impact = map_soln['b']
         self.ror = map_soln['ror']
-        self.depth = 1-ts.best_lc.min()
+        self.depth = 1-self.best_lc.min()
         return model, map_soln
 
     def plot_info(self, ax):
