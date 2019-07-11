@@ -178,6 +178,15 @@ def correct_quarter(lc,quarter):
 
     return corrected_flux
 
+def correct_all_quarters(lc):
+    lc2 = copy.copy(lc)
+    lc2.trposi = np.zeros_like(lc2.flux)
+    for qq in np.unique(lc2.quarter.astype('int')):
+        m = lc2.quarter==qq
+        corrflux = correct_quarter(lc2,qq)
+        lc2.trposi[m] = lc.flux[m] - corrflux + np.nanmedian(corrflux)
+    return lc2
+
 def correct_all(lc,ff):
     niter = lc.niter
 
@@ -185,8 +194,8 @@ def correct_all(lc,ff):
     weights, residuals, rank, s = np.linalg.lstsq(design.T,lc.flux)
 
     model = np.dot(weights,design)
-    model_time = np.dot(weights[:niter],design[:niter,:])
-    model_pos = np.dot(weights[niter:],design[niter:,:])
+    model_time = np.dot(weights[:(niter*2)],design[:(niter*2),:])
+    model_pos = np.dot(weights[(niter*2):],design[(niter*2):,:])
 
     model_time = model_time-np.nanmedian(model_time)+1
     model_pos = model_pos-np.nanmedian(model_pos)+1
@@ -269,7 +278,7 @@ def auto_sine_fit(lc,prob_max=1e-10, maxiter=60,min_period=4./24., max_period=30
     
     i = 0
     falarm = 0.0
-    tq = tqdm(total=maxiter)
+    tq = tqdm(total=maxiter,desc='sine waves')
 
     components = []
     while falarm <= prob_max:
@@ -391,7 +400,7 @@ def rho_from_pas(period,a):
     return 1e-3*(3*np.pi)/G * a**3 * (period*d_s)**-2
 
 
-def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=(1./24.,30.),niter=60,figtype='png',outdir='./'):
+def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,360.),star_p_range=(1./24.,30.),niter=60,figtype='png',outdir='./'):
     tic = clock()
     print('Loading light curve for KIC %d...' % kic)
 
@@ -426,6 +435,28 @@ def do_all(kic,auto=True,renormalize=False,planet_p_range=(1.,40.),star_p_range=
         print('Subtracted %d sine waves' % niter)   
     else:
         lc3, ff, pp, noise = iterative_sine_fit(lc2, niter,min_period=min_period, max_period=max_period)    
+    print('Cleaned!')
+
+    print('Correcting with CBVs...')
+    lc4 = correct_all(lc3,ff)
+    print('Corrected with CBVs!')
+
+    print('Clipping outliers')
+    dummy = lc4.copy()
+    model = lc4.trposi + lc4.trtime
+    dummy.flux -= model
+    dummy, mask = dummy.remove_outliers(return_mask=True,sigma_upper=4,sigma_lower=5)
+    # mask += (lc5.quarter>16)
+    lc6 = lc[~mask].copy()
+    lc6.quarter = lc6.quarter[~mask]
+    print('Clipped %d outliers' % np.sum(mask))
+
+    print('Running CLEAN again')
+    if auto == True:
+        lc3, ff, pp, noise, snrs, niter, components = auto_sine_fit(lc6,prob_max = 1e-20, maxiter=200,min_period=min_period,max_period=max_period) 
+        print('Subtracted %d sine waves' % niter)   
+    else:
+        lc3, ff, pp, noise = iterative_sine_fit(lc6, niter,min_period=min_period, max_period=max_period)    
     print('Cleaned!')
 
     print('Correcting with CBVs...')
@@ -524,18 +555,18 @@ def parallel_search(obj):
     except:
         print('Failed on',kic)
 
-def make_design_matrix(llc,frequencies):
+def make_design_matrix(llc,frequencies,offsets=True):
     cols = []
     t = llc.time
     channel = llc.channel[0]
 
-    for frequency in tqdm(frequencies):
+    for frequency in tqdm(frequencies,desc='frequencies'):
         cols.append(np.sin(2 * np.pi * frequency * t))
         cols.append(np.cos(2 * np.pi * frequency * t))
         
     quarters = llc.quarter
 
-    for quarter in tqdm(np.unique(quarters)):
+    for quarter in tqdm(np.unique(quarters),desc='quarters'):
         fname = find_cbv(quarter)
         cbvfile = fitsio.FITS(fname)
         m = (llc.quarter== quarter)
@@ -544,12 +575,17 @@ def make_design_matrix(llc,frequencies):
         for j in range(16):
             padded = np.zeros_like(t)
             padded[m] = cbvfile[channel]['VECTOR_%d'% (j+1)][cads]
+            padded = (padded-padded.min())/(padded.max()-padded.min())*2-1. # normalize
             cols.append(padded)
-        padded = np.zeros_like(t)
-        padded[m] = 1.
-        cols.append(padded)
-    
-    cols.append(np.ones_like(t))
+        
+        if offsets:
+            padded = np.zeros_like(t)
+            padded[m] = 1.
+            padded = (padded-padded.min())/(padded.max()-padded.min())*2-1. # normalize
+            cols.append(padded)
+    if not offsets:
+        cols.append(np.ones_like(t))
+
     return np.vstack(cols)
 
 ###-------------------------------------------------------------------###
@@ -562,7 +598,7 @@ class BasicSearch(object):
     def __init__(self, d, inject=False,star_p_range=(1./24.,30.),**kwargs):
         ## Keyword arguments
         ## -----------------
-        self.d = d
+        self.d = d.copy()
 
         self.nbin = kwargs.get('nbin', 2000)
         self.qmin = kwargs.get('qmin', 0.001)
